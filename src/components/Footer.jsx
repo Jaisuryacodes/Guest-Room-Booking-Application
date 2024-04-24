@@ -1,13 +1,14 @@
 import React from 'react'
-
+import icon from "../assets/image.png"
 const Footer = () => {
   return (
     <>
     {/* footer Container box */}
-    <div className="FooterBox flex justify-around align-middle  font-semibold  text-[#f7f7f7] bg-[#979494] px-1 py-1">
+    <div className="FooterBox flex justify-around align-middle  font-semibold bottom-0 py-4 bg-[#7250aa] text-white ">
              {/* div Companyinfo  used for-[ CompanyName ,Logo] */}
-        <div className="Companyinfo">
-           <h1>Guest House</h1>  
+        <div className="Companyinfo flex gap-3">
+           <h1>SUMMER HOLIDAYS</h1>  
+           <img className=' w-6 h-6' src={icon} alt="" />
         </div>
         {/* About div is used for -[ customer review, Address and Socialmedia] */}
         <div className="About">
