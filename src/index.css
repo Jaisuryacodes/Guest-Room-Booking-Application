@@ -13,7 +13,7 @@
    
 }
 html{
-  background-image: url("../public/sitebgpic.jpg");
+  background-image: url("./assets/sitebgpic.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
