@@ -3,7 +3,8 @@ import React from 'react'
 const SearchBox = () => {
   return (
     <>
-     <div className="backdrop-blur-sm bg-white/30 h-[80vh]  flex  flex-col justify-center align-middle items-center gap-6 ">
+<div className="p-3">
+       <div className="backdrop-blur-sm bg-white/30 py-[100px]  border-x-[3px] border-b-4 border-[#7250aa] rounded flex  flex-col justify-center align-middle items-center gap-6 ">
 
 <div className=" w-fit flex  flex-col justify-center align-middle gap-6 font-semibold  ">
 <h1 className='text-[32px]'>Guest Houses</h1>
@@ -16,7 +17,7 @@ const SearchBox = () => {
  </form>
 </div>
 
-</div></>
+</div></div></>
   )
 }
 

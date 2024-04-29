@@ -4,11 +4,12 @@ import Error from './components/Error.jsx';
 import SignupPage from './components/SignupPage.jsx';
 import ForgetPage from './components/ForgetPage.jsx';
 import Layout from './Layout/Layoutpage.jsx'
-import Menu from "./components/Menu.jsx";
+import CustomerMenu from "./page/customer/components/CustomerMenu.jsx";
 import Homepage from "./Layout/Homepage.jsx";
-
-const Router = createBrowserRouter([{
-        
+import Customerpage from "./Layout/Customerpage.jsx";
+import Content from "./page/customer/components/Content.jsx";
+const Router = createBrowserRouter([
+    {    
             path:"/",
             element: <Homepage/>,
          errorElement:<Error/>,
@@ -24,6 +25,21 @@ const Router = createBrowserRouter([{
         {
             path:"/forgetpassword",
             element:<ForgetPage/> 
+        },
+        {
+            path:"/Layout",
+            element:<Layout/>
+        },
+        {
+            path:"/Customer",
+            element:<Customerpage/>,
+            // children:[ 
+            //     {
+            //         path:"/Customer",
+            //         element:<CustomerMenu/>,
+            //     },
+                
+            // ]
         },
     
   
