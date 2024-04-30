@@ -8,6 +8,7 @@ import CustomerMenu from "./page/customer/components/CustomerMenu.jsx";
 import Homepage from "./Layout/Homepage.jsx";
 import Customerpage from "./Layout/Customerpage.jsx";
 import Content from "./page/customer/components/Content.jsx";
+import HouseOwnerpage from "./Layout/HouseOwnerpage.jsx";
 const Router = createBrowserRouter([
     {    
             path:"/",
@@ -41,7 +42,10 @@ const Router = createBrowserRouter([
                 
             // ]
         },
-    
+      {
+        path:"/HouseOwner",
+        element:<HouseOwnerpage/>
+      }
   
   
   
