@@ -14,7 +14,6 @@ const CustomerMenu = () => {
       </div>
    
    
-   
       
     </div>
   )
