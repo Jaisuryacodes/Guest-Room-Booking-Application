@@ -6,11 +6,20 @@ const SignupPage = () => {
   const [name,setname]=useState('');
   const [email,setemail]=useState('');
   const [mobile,setmobile]=useState('');
-  const [Address,setAddress]=useState('');
+  const [address,setaddress]=useState('');
   const [password,setpassword]=useState('');
-  function signup(ev){
+   function signup(ev){
     ev.preventDefault();
-    axios.post('http://localhost:4000/Signup');
+   axios.post('http://localhost:4000/Signup',{
+      name,
+      email,
+      mobile,
+      address,
+      password,  
+    }).then(
+      res=>console.log(res)
+    ).catch(err=>console.log(err))
+    // alert('Signup successful');
    }
   return (
     <>
@@ -40,8 +49,8 @@ SUMMER HOLIDAYS
        />
       <input className='bg-transparent outline-none p-2 border-[1px] border-[#0c0c0c]  placeholder:text-[#070707]' 
         type="text" placeholder='Address' required  
-        value={Address} 
-      onChange={ev=>setAddress(ev.target.value)}
+        value={address} 
+      onChange={ev=>setaddress(ev.target.value)}
         />
       <input className='bg-transparent outline-none p-2 border-[1px] border-[#0c0c0c]  placeholder:text-[#111111]' 
        type="password" placeholder="Password"  required minLength='8'
