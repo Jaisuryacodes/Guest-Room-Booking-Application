@@ -3,7 +3,7 @@ import Samplepic from "../assets/GhsamplePic1.jpg"
 const Cards = () => {
   return (
     <>
-    <div className="  p-3 mb-3 mt-3 backdrop-blur-md  bg-white/10  border-[1px] rounded border-[#7250aa] ">
+    <div className="  p-3 mb-3 mt-3   bg-[#bababa]  border-[1px] rounded border-[#7250aa] ">
         <div className="flex flex-col gap-4">
         <div className="">
           <img className='w-[400px]' src={Samplepic} alt="" />

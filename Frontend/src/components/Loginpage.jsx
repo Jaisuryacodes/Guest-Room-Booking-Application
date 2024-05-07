@@ -1,31 +1,43 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import axios from 'axios'
 const Loginpage = () => {
   const [email,setemail]=useState('');
   const [password,setpassword]=useState('');
+  const [redirect,setredirect]=useState('false');
 function Login(ev){
   ev.preventDefault();
-   try{
-    axios.post('/Login',{email,password,});
-    alert('Login successful');
-   }
-   catch(e){
-
-    alert('Login failed');
-   }
-
+    axios.post('/Login',
+    {email,password,}).then ((res)=>{
+    alert(res.data.msg);
+    if(res.data.msg=="Login successful"){
+      //  alert("Login successful");
+      setredirect(true);
+      }
+    else if(res.data.msg=="Incorrect Password") {
+      // ale rt("Incorrect Password");
+    }
+    }).catch((err)=>{
+      // ale rt("Incorrect Password");
+    })
+    if( redirect){
+      // setredirect(true);
+        return <Navigate to={'/'} />
+    }
 }
+ 
   return (
  
 <>
-<div className="FooterBox flex justify-around align-middle  font-bold  py-4 bg-[#7250aa] text-white">
-SUMMER HOLIDAYS
-</div>
-<div className=" h-[81.9vh] flex  flex-col justify-between  items-center text-[#1f6bb888] font-normal text-[24px] ">
 
-<div className="login page flex flex-col mt-[15%] justify-center align-middle items-center font-semibold  text-[#0c0c0c] rounded-md py-10 px-10 border-[1px] backdrop-blur-sm bg-white/30 border-[#c6bebe] w-[400px] "> 
-      <h1>Welcome</h1>
+<div className=" flex  flex-col justify-between  items-center  text-[24px]  ">
+
+<div className="login page flex flex-col mt-[5%] mb-[10%] justify-center align-middle items-center font-semibold  text-[#0c0c0c] rounded-md gap-4 border-[1px]  border-[#c6bebe] w-[400px] "> 
+     
+<Link to='/'> <div className=" z-40 ml-[-20px]  text-[24px] bg-[#009933] hover:bg-[#cc0700] rounded-sm px-3 text-white ">
+X 
+  </div></Link> 
+  <h1 className=' mt-6'>Welcome</h1>
     <form onSubmit={Login} className=' flex flex-col gap-[12px] items-center  text-[16px] text-[#0c0c0c]  '>
     <input className='bg-transparent outline-none p-2 border-[1px] border-[#0c0c0c]  placeholder:text-[#111111]'
      type="email" placeholder="Email"  required  
@@ -36,9 +48,13 @@ SUMMER HOLIDAYS
       value={password} 
       onChange={ev=>setpassword(ev.target.value)}/>
       <div className=" text-[12px] font-medium">
-      <div className=" flex gap-4 font-medium mt-4"> <Link to="/forgetpassword">Forget Password?</Link>
-      <h1>No Account ? <Link to="/Signup">Signup</Link> </h1></div>
-      <button className=' text-[24px] mt-4'>Login</button>
+      <div className=" flex gap-4 justify-center align-middle items-center  font-medium mt-4"> <span className="underline decoration-[#46eada] text-[14px]  "> 
+      <Link to="/forgetpassword">Forget Password?</Link></span> 
+      <h1 >No Account ? 
+        <span className="underline decoration-violet-700 text-[16px]  ">
+          <Link to="/Signup">Register</Link>
+       </span> </h1></div>
+      <button className=' text-[24px] mt-4 bg-[#009933] hover:bg-[#00cc44] rounded-sm p-1 text-white mb-5 '>Login</button>
       </div>
     </form>
    

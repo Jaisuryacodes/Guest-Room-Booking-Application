@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <>
     {/* footer Container box */}
-    <div className="FooterBox flex justify-around align-middle  font-semibold bottom-0 py-4 bg-[#7250aa] text-white ">
+    <div className="FooterBox flex justify-around align-middle  font-semibold bottom-0 fixed left-0 w-full py-4 bg-[#7250aa] text-white ">
              {/* div Companyinfo  used for-[ CompanyName ,Logo] */}
         <div className="Companyinfo flex gap-3">
            <h1>SUMMER HOLIDAYS</h1>  
