@@ -3,11 +3,16 @@ import './App.css'
 import axios from 'axios';
 import{ RouterProvider,} from "react-router-dom";
 import Router from './Router';
-axios.defaults.baseURL = 'http://localhost:4000'
+import { UserContextProvider } from './components/Usercontexr';
+axios.defaults.baseURL = 'http://localhost:4000';
+axios.defaults.withCredentials=true;
 function App() {
   return (
     <>
-  <RouterProvider router={Router} />
+    <UserContextProvider>
+    <RouterProvider router={Router} />
+    </UserContextProvider>
+  
     </>
   )
 }

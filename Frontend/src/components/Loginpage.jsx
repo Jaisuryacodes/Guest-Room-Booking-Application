@@ -1,29 +1,41 @@
 import React, { useState } from 'react'
 import { Link, Navigate } from 'react-router-dom'
 import axios from 'axios'
+import { useContext } from 'react';
+import { UserContext } from './Usercontexr';
+
 const Loginpage = () => {
   const [email,setemail]=useState('');
   const [password,setpassword]=useState('');
-  const [redirect,setredirect]=useState('false');
+  const [redirect,setredirect]=useState('');
+  const [status,setstatus]=useState('');
+  const {setUser}=useContext(UserContext)
 function Login(ev){
   ev.preventDefault();
     axios.post('/Login',
     {email,password,}).then ((res)=>{
-    alert(res.data.msg);
+    setstatus(res.data.msg);
+    setUser(res.data)
     if(res.data.msg=="Login successful"){
-      //  alert("Login successful");
-      setredirect(true);
+      setTimeout(()=>{
+        if(res.data.Type=="customer"){
+          setredirect("/Customer")
+        }
+        else{
+          setredirect("/HouseOwner")
+        }
+      },1000)
+      
       }
-    else if(res.data.msg=="Incorrect Password") {
-      // ale rt("Incorrect Password");
-    }
+  
     }).catch((err)=>{
-      // ale rt("Incorrect Password");
+      alert("Try again");
     })
-    if( redirect){
-      // setredirect(true);
-        return <Navigate to={'/'} />
-    }
+    
+}
+if(redirect){
+  // setredirect(true);
+    return <Navigate to={redirect} />
 }
  
   return (
@@ -34,9 +46,9 @@ function Login(ev){
 
 <div className="login page flex flex-col mt-[5%] mb-[10%] justify-center align-middle items-center font-semibold  text-[#0c0c0c] rounded-md gap-4 border-[1px]  border-[#c6bebe] w-[400px] "> 
      
-<Link to='/'> <div className=" z-40 ml-[-20px]  text-[24px] bg-[#009933] hover:bg-[#cc0700] rounded-sm px-3 text-white ">
+<Link className=" z-40  text-[24px] bg-[#009933] hover:bg-[#cc0700] rounded-sm px-3 text-white ml-auto" to='/'>  
 X 
-  </div></Link> 
+  </Link> 
   <h1 className=' mt-6'>Welcome</h1>
     <form onSubmit={Login} className=' flex flex-col gap-[12px] items-center  text-[16px] text-[#0c0c0c]  '>
     <input className='bg-transparent outline-none p-2 border-[1px] border-[#0c0c0c]  placeholder:text-[#111111]'
@@ -56,6 +68,7 @@ X
        </span> </h1></div>
       <button className=' text-[24px] mt-4 bg-[#009933] hover:bg-[#00cc44] rounded-sm p-1 text-white mb-5 '>Login</button>
       </div>
+      <p>{status} </p>
     </form>
    
 </div>

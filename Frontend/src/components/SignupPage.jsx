@@ -28,13 +28,15 @@ const SignupPage = () => {
     <>
 
 <div className="  flex  flex-col justify-between  items-center text-[#1f6bb888] font-normal text-[24px] ">
-<Link to='/'> <div className=" absolute z-40 ml-[-15px]  text-[24px] mt-4 bg-[#009933] hover:bg-[#cc0700] rounded-sm px-3 text-white ">
-X 
-  </div></Link>
-<div className="  relative mt-4  flex   justify-center align-middle items-center ">
 
-<div className="login page flex flex-col  justify-center align-middle items-center font-semibold  text-[#090918] rounded-md py-10 px-10 border-[1px]  border-[#c6bebe] w-[400px] "> 
-      <h1 className=' text-[24px] text-[#090918] '>Signup </h1>
+<div className="  relative mt-4  flex    justify-center align-middle items-center ">
+
+<div className="login page flex flex-col  justify-center align-middle items-center font-semibold  text-[#090918] rounded-md   border-[1px]  border-[#c6bebe] w-[400px] "> 
+    
+<Link className=" z-40  text-[24px] bg-[#009933] hover:bg-[#cc0700] rounded-sm px-3 text-white ml-auto" to='/'>  
+X 
+  </Link>  
+   <h1 className=' text-[24px] text-[#090918] '>Signup </h1>
     <form onSubmit={signup} className=' flex flex-col gap-[12px] items-center  text-[16px]   '>
       <input className='bg-transparent outline-none p-2 border-[1px] border-[#0c0c0c] placeholder:text-[#111111]' 
       type="text" placeholder="Full Name"  required
@@ -69,7 +71,7 @@ X
       <div className=" text-[12px] font-medium">
       <div className=" flex gap-4 font-medium mt-4">
       <h1>have Account <Link className='text-[#090918] underline decoration-violet-700 text-xl ml-2' to="/Login"> Login</Link> </h1></div> 
-      <button className=' text-[24px] mt-4 bg-[#009933] hover:bg-[#00cc44] rounded-sm p-1 text-white' >Register</button>
+      <button className=' text-[24px] mt-4 bg-[#009933] hover:bg-[#00cc44] rounded-sm mb-2 text-white' >Register</button>
       </div>
       
     </form>

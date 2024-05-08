@@ -9,6 +9,7 @@ import Homepage from "./Layout/Homepage.jsx";
 import Customerpage from "./Layout/Customerpage.jsx";
 import Content from "./page/customer/components/Content.jsx";
 import HouseOwnerpage from "./Layout/HouseOwnerpage.jsx";
+import ProfileIcon from "./components/ProfileIcon.jsx";
 const Router = createBrowserRouter([
     {    
             path:"/",
@@ -37,18 +38,12 @@ const Router = createBrowserRouter([
         {
             path:"/Customer",
             element:<Customerpage/>,
-            // children:[ 
-            //     {
-            //         path:"/Customer",
-            //         element:<CustomerMenu/>,
-            //     },
-                
-            // ]
         },
       {
         path:"/HouseOwner",
-        element:<HouseOwnerpage/>
-      }
+        element:<HouseOwnerpage/>,
+      },
+      
   
   
   
