@@ -1,35 +1,43 @@
-import React, { useContext, useState } from 'react'
-import avatorIcon from '../assets/UseravatarIcon.png'
-import MenuIcon from '../assets/MenuIcon.png'
-import { UserContext } from './Usercontexr'
+import React, { useContext, useState } from "react";
+import avatorIcon from "../assets/UseravatarIcon.png";
+import MenuIcon from "../assets/MenuIcon.png";
+import { UserContext } from "./UserContext";
+import { Navigate } from "react-router-dom";
+import axios from "axios";
 const ProfileIcon = () => {
-    const [menucard,setmenucard] = useState(false)
-    function menufn()
-    {
-      setmenucard(previous=>!previous)
-    }
-  const{ User}= useContext(UserContext);
+  const [Redirect,setRedirect]=useState(null);
+  const [menucard, setmenucard] = useState(false);
+  function menufn() {
+    setmenucard((previous) => !previous);
+  }
+  
+  const { User } = useContext(UserContext);
+  async function logout(){
+   await axios.post('/logout' );
+   setRedirect('/');
+  }
+  if(Redirect){
+    return <Navigate to ={Redirect}/>
+  }
   return (
-    <div onClick={menufn} >
-      <div className=" flex flex-col ">
-     <div className="bg-[#f5f7f6] flex p-2 gap-2 rounded-full">
-     <img className='w-[30px]' src={avatorIcon} />
-      <img className='w-[30px]' src={MenuIcon}  />
-      {
-      <div>{ User.name}</div>
-    }
-     </div>
-      {
-        menucard? ( <div className=" px-5 absolute top-16 bg-[#3662b5] rounded-md text-black">
-             <h2>Logout</h2>
-
-             </div>
-
-        ) : <h3></h3>
-      }
+    <div onClick={menufn}>
+      <div className=" flex flex-col  ">
+        <div className="bg-[#f5f7f6] flex p-2 gap-2 rounded-full justify-center align-middle items-center text-black">
+          <img className="w-[30px]" src={avatorIcon} />
+          {<div >{User?.name}</div>}
+          <img className="w-[30px]" src={MenuIcon} />
+         
+        </div>  
+        {menucard ? (
+          <div className=" px-5 absolute top-16 right-5 bg-[#3cf94f] rounded-md text-black">
+            <button onClick={logout} > Logout</button>
+          </div>
+        ) : (
+          <h3></h3>
+        )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProfileIcon
+export default ProfileIcon;

@@ -4,12 +4,12 @@ import Error from './components/Error.jsx';
 import SignupPage from './components/SignupPage.jsx';
 import ForgetPage from './components/ForgetPage.jsx';
 import Layout from './Layout/Layoutpage.jsx'
-import CustomerMenu from "./page/customer/components/CustomerMenu.jsx";
 import Homepage from "./Layout/Homepage.jsx";
 import Customerpage from "./Layout/Customerpage.jsx";
-import Content from "./page/customer/components/Content.jsx";
 import HouseOwnerpage from "./Layout/HouseOwnerpage.jsx";
-import ProfileIcon from "./components/ProfileIcon.jsx";
+import OwnerContent from './page/houseOwners/components/Content.jsx'
+import NewForm from './page/houseOwners/components/Card.jsx'
+
 const Router = createBrowserRouter([
     {    
             path:"/",
@@ -42,6 +42,18 @@ const Router = createBrowserRouter([
       {
         path:"/HouseOwner",
         element:<HouseOwnerpage/>,
+        children:[
+          
+            {
+                path:"/HouseOwner",
+                element:<OwnerContent/>,
+                
+            },
+            {
+              path:'/HouseOwner/NewForm',
+              element:<NewForm/>,
+            }
+        ]
       },
       
   
