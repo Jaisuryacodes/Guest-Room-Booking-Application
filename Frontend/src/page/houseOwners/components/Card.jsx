@@ -1,19 +1,25 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Perks from "./Perks";
+import axios from "axios";
 const Card = () => {
-  const [title, setTitle] = useState("");
-  const [address, setaddress] = useState("");
+  const [title, setTitle] = useState('');
+  const [address, setaddress] = useState('');
   const [photos, setPhotos] = useState([]);
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState('');
   const [perks, setPerks] = useState([]);
   const [photoLink, setPhotoLink] = useState([]);
   const [maxGuest, setmaxGuest] = useState(1);
-  const [contactInfo, setcontactInfo] = useState("");
-  const [price, setprice] = useState("");
-
-function addPhotosByUrl(){
-   
+  const [contactInfo, setcontactInfo] = useState('');
+  const [price, setprice] = useState('');
+   const [addedPhoto,setaddedPhoto]=useState([]);
+async function addPhotosByUrl(ev){
+   ev.preventDefault();
+  const {data:filename} = await axios.post('/uploadsByLink',{link:photoLink});
+  setaddedPhoto(prev=>{
+   return [...prev,filename];
+  });
+  setPhotoLink('');
 }
   return (
     <>
@@ -25,15 +31,14 @@ function addPhotosByUrl(){
             type="text"
             placeholder="Title"
             value={title}
-            onchange={(ev) => setTitle(ev.target.value)}
-          />
+            onChange={ev => setTitle(ev.target.value)}/>
           <h1>Address :</h1>
           <input
             className=" border-[1px] border-black p-1"
             type="text"
             placeholder="Address"
             value={address}
-            onchange={(ev) => setaddress(ev.target.value)}
+            onChange={ev => setaddress(ev.target.value)}
           />
 
           <h1>Photos</h1>
@@ -43,29 +48,25 @@ function addPhotosByUrl(){
               type="text"
               placeholder="Past Link"
               value={photoLink}
-              onchange={(ev) => setPhotoLink(ev.target.value)}
+              onChange={ev => setPhotoLink(ev.target.value)}
             />
 
-            <button className=" border-[1px] border-[#8b8686] p-2 bg-[#009933] text-white rounded ">
+            <button onClick={addPhotosByUrl} className=" border-[1px] border-[#8b8686] p-2 bg-[#009933] text-white rounded ">
               Add Photo
             </button>
           </div>
-          <div className=" ">
-            <button className=" border-[1px] border-[#8b8686] p-3  flex flex-col items-center rounded ">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-6 h-6"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M12 16.5V9.75m0 0 3 3m-3-3-3 3M6.75 19.5a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z"
-                />
-              </svg>
+          <div className=" w-[500px] flex flex-wrap gap-3">
+             {
+               addedPhoto.length >0 && addedPhoto.map(link=>(
+                
+                     <img className="w-20 h-20  border-[1px] rounded-sm border-[#9d4040]" src={'http://localhost:4000/Uploads/'+link} alt="fffffffg" />
+            
+               ))
+             }
+          </div>
+          <div className="flex  items-center ">
+            <button className=" cursor-pointer border-[1px] border-[#8b8686]    rounded ">
+              <input type="file" className="hidden" />
               Upload
             </button>
           </div>
@@ -73,10 +74,10 @@ function addPhotosByUrl(){
 
           <textarea className=" border-[1px] border-black p-1 "
            value={description}
-           onchange={ev=>setDescription(ev.target.value)}
+           onChange={ev=>setDescription(ev.target.value)}
           />
           <h1>Perks</h1>
-          <Perks selected={perks} onchange={setPerks} />
+          <Perks selected={perks} onChange={setPerks} />
           <h1>Contact Info</h1>
           <input
             className=" border-[1px] border-black p-1"
@@ -84,7 +85,7 @@ function addPhotosByUrl(){
             placeholder=' "Mobile no"'
             maxLength="10"
             value={contactInfo}
-            onchange={ev=>setcontactInfo(ev.target.value)}
+            onChange={ev=>setcontactInfo(ev.target.value)}
           />
 
           <div className=" flex  justify-center align-middle items-center gap-1">
@@ -94,7 +95,7 @@ function addPhotosByUrl(){
               type="text"
               placeholder="Capcity of room"
               value={maxGuest}
-              onchange={ev=>setmaxGuest(ev.target.value)}
+              onChange={ev=>setmaxGuest(ev.target.value)}
             />
             <h1>Amount : </h1>
             <input
@@ -102,9 +103,10 @@ function addPhotosByUrl(){
               type="text"
               placeholder="Price"
               value={price}
-              onchange={ev=>setprice(ev.target.value)}
+              onChange={ev=>setprice(ev.target.value)}
             />
           </div>
+          <button> submit</button>
         </form>
       </div>
     </>

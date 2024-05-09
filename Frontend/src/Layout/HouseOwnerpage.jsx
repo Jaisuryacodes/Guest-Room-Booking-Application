@@ -10,7 +10,7 @@ const HouseOwnerpage = () => {
     
   
     <HouseOwnerMenu/>
-  <Outlet/>
+   <Outlet/>
     
     <Footer/>
    </>
