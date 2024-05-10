@@ -3,9 +3,10 @@ const mongoose = require("mongoose");
 const bcrypt=require('bcrypt');
 const  jwt =require('jsonwebtoken');
 const User =require('./models/User.js');
-const CookieParser = require('cookie-parser');
 const cors =require('cors');
 const imageDownloader = require('image-downloader');
+const multer = require('multer');
+ const fs =require('fs');
 const cookieParser = require('cookie-parser');
 require('dotenv').config()
 const app =express();
@@ -104,5 +105,23 @@ app.post('/uploadsByLink', async(req,res)=>{
   dest:__dirname +'/uploads/'+newName,
  })
  res.json(newName)
+})
+ 
+const photosMiddleware =multer({ dest:'uploads/'});
+app.post('/upload',photosMiddleware.array('photo',100), async(req,res)=>{
+  const uploadedFiles=[];
+  for(let i=0;i<req.files.length;i++)
+{
+  const {path,originalname}= req.files[i];
+ const part= originalname.split('.');
+ const ext= part[part.length-1];
+ const newPath=path +'.'+ext;
+    fs.renameSync(path,newPath);
+    uploadedFiles.push(newPath.replace('uploads\\',''));
+} 
+  res.json(uploadedFiles);
+})
+app.post('/place',(req, res) => {
+  
 })
 app.listen(4000);

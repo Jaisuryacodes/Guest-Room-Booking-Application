@@ -10,6 +10,9 @@ const placeSchema=new mongoose.Schema(
        contactInfo:String,
        maxGuest:number,
        price:number,    
+       checkIn:string,
+       checkOut:string,
+    
 });
 
 const UserSchema= mongoose.model('Place',placeSchema);
