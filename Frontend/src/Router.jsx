@@ -48,12 +48,13 @@ const Router = createBrowserRouter([
                 path:"/HouseOwner",
                 element:<OwnerContent/>,
                 
-            },]
+            },
+            {
+                path:'/HouseOwner/NewForm',
+                element:<NewForm/>,
+              },]
       },
-      {
-        path:'/HouseOwner/NewForm',
-        element:<NewForm/>,
-      },
+      
       
   
   

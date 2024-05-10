@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Perks from "./Perks";
 import axios from "axios";
 const Card = () => {
+   const [redirect,setredirect] =useState('')
   const [title, setTitle] = useState('');
   const [address, setaddress] = useState('');
   const [photos, setPhotos] = useState([]);
@@ -12,7 +13,30 @@ const Card = () => {
   const [maxGuest, setmaxGuest] = useState(1);
   const [contactInfo, setcontactInfo] = useState('');
   const [price, setprice] = useState('');
+  const [checkIn, setcheckIn]= useState('');
+  const [checkOut, setcheckOut]= useState('');
    const [addedPhoto,setaddedPhoto]=useState([]);
+  async function addnewplace(ev){
+   ev.preventDefault();
+   await axios.post('/place',{
+      title,
+      address,
+      photos,
+      description,
+      perks,
+      maxGuest,
+      contactInfo,
+      price,
+      addedPhoto,
+      checkIn,
+      checkOut,
+   });
+   setredirect('/HouseOwner');
+
+ }
+ if(redirect){
+   return <Navigate to={redirect}/>;
+ }
 async function addPhotosByUrl(ev){
    ev.preventDefault();
   const {data:filename} = await axios.post('/uploadsByLink',{link:photoLink});
@@ -21,10 +45,30 @@ async function addPhotosByUrl(ev){
   });
   setPhotoLink('');
 }
+ function uploadPhoto(ev){
+   ev.preventDefault();
+    const files =ev.target.files;
+    const data=new FormData();
+    for (let i=0; i<files.length; i++){
+      data.append('photo',files[i]);
+    }
+   
+    axios.post('/upload',data,{
+      headers:{
+        'Content-Type':'multipart/form-data'
+      }
+    }).then(res=>{
+      const { data:filename}=res;
+      
+      setaddedPhoto(prev=>{
+         return [...prev,...filename];
+        });
+    })
+ }
   return (
     <>
       <div className=" flex  justify-center align-middle items-center mt-10  ">
-        <form className="  flex flex-col justify-center align-middle  border-[1px] border-black p-5 bg-[#d5d5d5] rounded-md  gap-4 ">
+        <form onSubmit={addnewplace} className="  flex flex-col justify-center align-middle  border-[1px] border-black p-5 bg-[#d5d5d5] rounded-md  gap-4 ">
           <h1>Title :</h1>
           <input
             className=" border-[1px] border-black p-1 "
@@ -55,20 +99,20 @@ async function addPhotosByUrl(ev){
               Add Photo
             </button>
           </div>
-          <div className=" w-[500px] flex flex-wrap gap-3">
+          <div className=" w-[500px] flex flex-wrap gap-3 object-cover">
              {
                addedPhoto.length >0 && addedPhoto.map(link=>(
                 
-                     <img className="w-20 h-20  border-[1px] rounded-sm border-[#9d4040]" src={'http://localhost:4000/Uploads/'+link} alt="fffffffg" />
+                     <img key={link} className="w-20 h-20  border-[1px] rounded-sm border-[#9d4040]" src={'http://localhost:4000/Uploads/'+link} alt="not found" />
             
                ))
              }
           </div>
           <div className="flex  items-center ">
-            <button className=" cursor-pointer border-[1px] border-[#8b8686]    rounded ">
-              <input type="file" className="hidden" />
+            <label className=" cursor-pointer border-[1px] border-[#8b8686]  p-3 rounded ">
+              <input type="file" multiple className="hidden"  onChange={uploadPhoto}/>
               Upload
-            </button>
+            </label>
           </div>
           <h1>Description</h1>
 
@@ -88,7 +132,7 @@ async function addPhotosByUrl(ev){
             onChange={ev=>setcontactInfo(ev.target.value)}
           />
 
-          <div className=" flex  justify-center align-middle items-center gap-1">
+          <div className=" flex flex-col justify-center align-middle items-center gap-6">
             <h1>Capcity of room : </h1>
             <input
               className=" border-[1px] border-black p-1"
@@ -97,6 +141,24 @@ async function addPhotosByUrl(ev){
               value={maxGuest}
               onChange={ev=>setmaxGuest(ev.target.value)}
             />
+        <div className=" flex justify-center align-middle items-center gap-2">
+        <h1> CheckIn : </h1>
+            <input
+              className=" border-[1px] border-black p-1"
+              type="text"
+              placeholder="check-in-time"
+              value={checkIn}
+              onChange={ev=>setcheckin(ev.target.value)}
+            />
+            <h1> CheckOut : </h1>
+            <input
+              className=" border-[1px] border-black p-1"
+              type="text"
+              placeholder="check-out-time"
+              value={checkIn}
+              onChange={ev=>setcheckOut(ev.target.value)}
+            />
+        </div>
             <h1>Amount : </h1>
             <input
               className=" border-[1px] border-black p-1"
