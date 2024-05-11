@@ -12,7 +12,9 @@ const HouseOwnerpage = () => {
     <HouseOwnerMenu/>
    <Outlet/>
     
-    <Footer/>
+   <div className=" bottom-0 w-full">
+   <Footer/>
+   </div>
    </>
   )
 }
