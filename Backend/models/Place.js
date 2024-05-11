@@ -8,12 +8,12 @@ const placeSchema=new mongoose.Schema(
        description:String,
        perks:[String],
        contactInfo:String,
-       maxGuest:number,
-       price:number,    
-       checkIn:string,
-       checkOut:string,
-    
+       maxGuest:Number,
+       price:Number,    
+       checkIn:String,
+       checkOut:String,
+     
 });
 
-const UserSchema= mongoose.model('Place',placeSchema);
+const PlaceModel= mongoose.model('Place',placeSchema);
 module.exports=PlaceModel;
