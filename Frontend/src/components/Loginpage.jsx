@@ -17,6 +17,7 @@ const Loginpage = () => {
       .then((res) => {
         setstatus(res.data.msg);
         setUser(res.data);
+     
         if (res.data.msg == "Login successful") {
           setTimeout(() => {
             if (res.data.Type == "customer") {
@@ -31,11 +32,12 @@ const Loginpage = () => {
         alert("Try again");
       });
   }
+  
   if (redirect) {
     // setredirect(true);
     return <Navigate to={redirect} />;
   }
-
+ 
   return (
     <>
       <div className=" flex  flex-col justify-between  items-center  text-[24px]  ">
