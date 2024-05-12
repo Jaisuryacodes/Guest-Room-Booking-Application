@@ -156,7 +156,7 @@ app.get('/places',async(req,res)=>{
       if(err) throw err;
       const places= await Place.find({owner:userData.id});
       res.json(places);
-    });
+    }); 
   }
   else{
     
@@ -167,5 +167,36 @@ app.get('/allPlace',async(req,res)=>{
   const allPlace = await Place.find({});
   res.json(allPlace);
 })
+app.get('/places/:id',async(req, res)=>{
+  const {id}=req.params;
+  res.json(await Place.findById(id));
+
+});
+  app.put('/place',async(req, res)=>{
+    const {id,title,address,Photos,description,perks,maxGuest,contactInfo,price,bets,rooms,MinimumDays,MaximumDays,}=req.body;  
+    const {token}=req.cookies;
+
+ jwt.verify(token,jwtsecret,{},async(err,userData)=>{
+  const placeDoc=await Place.findById(id);
+  if(userData.id === placeDoc.owner.toString()){
+     placeDoc.set({
+      title,
+      address,
+      Photos,
+      description,
+      perks,
+      maxGuest,
+      contactInfo, 
+      price,
+      bets,
+      rooms,
+      MinimumDays,
+      MaximumDays,   
+     });
+  await  placeDoc.save();
+    res.json('ok');
+  }
+ })
+  })
 app.listen(4000);
  
