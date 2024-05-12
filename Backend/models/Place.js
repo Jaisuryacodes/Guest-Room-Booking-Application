@@ -4,14 +4,16 @@ const placeSchema=new mongoose.Schema(
        owner:{type:mongoose.Schema.Types.ObjectId,ref:'User'},
        title:String,
        address:String,
-       photos:[String],
+       Photos:[String],
        description:String,
        perks:[String],
-       contactInfo:String,
        maxGuest:Number,
-       price:Number,    
-       checkIn:String,
-       checkOut:String,
+       contactInfo:String,
+       price:Number,  
+       bets:Number,
+       rooms:Number,  
+       MinimumDays:Number,
+       MaximumDays:Number,
      
 });
 

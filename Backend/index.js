@@ -123,7 +123,7 @@ app.post('/upload',photosMiddleware.array('photo',100), async(req,res)=>{
   res.json(uploadedFiles);
 })
 app.post('/place',(req, res) => {
-  const {title,address,photos,description,perks,maxGuest,contactInfo,price,checkIn,checkOut}=req.body;
+  const {title,address,Photos,description,perks,maxGuest,contactInfo,price,bets,rooms,MinimumDays,MaximumDays,}=req.body;
   const {token}=req.cookies;
   jwt.verify(token,jwtsecret,{},async(err,userData)=>{
     if(err) throw err;
@@ -131,14 +131,16 @@ app.post('/place',(req, res) => {
       owner: userData.id,
       title,
       address,
-      photos,
+      Photos,
       description,
       perks,
       maxGuest,
       contactInfo,
       price,
-      checkIn,
-      checkOut,
+      bets,
+      rooms,
+      MinimumDays,
+      MaximumDays,
     });
     res.json(PlaceDoc);
     
@@ -148,6 +150,7 @@ app.post('/place',(req, res) => {
 
 app.get('/places',async(req,res)=>{
   const {token}=req.cookies;
+   
   if(token){
     jwt.verify(token,jwtsecret,{},async(err,userData)=>{
       if(err) throw err;
@@ -156,8 +159,13 @@ app.get('/places',async(req,res)=>{
     });
   }
   else{
-    const places= await Place.find({});
-    res.json(places);
+    
+    res.json(null);
   }
 });
+app.get('/allPlace',async(req,res)=>{
+  const allPlace = await Place.find({});
+  res.json(allPlace);
+})
 app.listen(4000);
+ 
