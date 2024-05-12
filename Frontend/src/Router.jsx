@@ -53,7 +53,12 @@ const Router = createBrowserRouter([
             {
                 path:'/HouseOwner/NewForm',
                 element:<NewForm/>,
-              },]
+              },
+            {
+                path:'/HouseOwner/NewForm/:id',
+                element:<NewForm/>,
+              },
+            ]
       },
       
       

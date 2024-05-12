@@ -1,10 +1,15 @@
 import React from 'react'
 import CustomerMenu from '../page/customer/components/CustomerMenu'
+import ProfileIcon from './ProfileIcon'
 
 const SeeMore = () => {
   return (
     <div>
-     <CustomerMenu/>
+          <div className="">
+            <CustomerMenu/>
+          
+          <ProfileIcon/>
+          </div>
     </div>
   )
 }

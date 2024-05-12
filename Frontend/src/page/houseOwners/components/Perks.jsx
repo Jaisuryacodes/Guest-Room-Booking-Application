@@ -15,19 +15,19 @@ export  default function Perks({selected, onChange}){
         <>
         <div className="grid grid-cols-4 gap-2 ">
             <label className='border-[1px] border-[#666262] p-2 rounded-xl bg-[#888] cursor-pointer     ' >
-               <input type="checkbox" name=" wifi " onChange={handleCheckboxClick} /> 
+               <input type="checkbox"  checked={selected.includes(" wifi ") } name=" wifi " onChange={handleCheckboxClick} /> 
                <span>Wifi</span>
             </label>
             <label className='border-[1px] border-[#111] p-2 rounded-xl bg-[#888] cursor-pointer   ' >
-               <input type="checkbox" name=" Parking " onChange={ handleCheckboxClick} /> 
+               <input type="checkbox" checked={selected.includes( " Parking ")} name=" Parking " onChange={ handleCheckboxClick} /> 
                <span>parking</span>
             </label>
             <label className='border-[1px] border-[#111] p-2 rounded-xl bg-[#888] cursor-pointer   ' >
-               <input type="checkbox" name=" Tv " onChange={ handleCheckboxClick} /> 
+               <input type="checkbox" checked={selected.includes(" Tv ")} name=" Tv " onChange={ handleCheckboxClick} /> 
                <span>TV</span>
             </label>
             <label className='border-[1px] border-[#111] p-2 rounded-xl bg-[#888] cursor-pointer   ' >
-               <input type="checkbox" name=" Playground" onChange={ handleCheckboxClick} /> 
+               <input type="checkbox" checked={selected.includes(" Playground")} name=" Playground" onChange={ handleCheckboxClick} /> 
                <span>Playground</span>
             </label>
           </div>

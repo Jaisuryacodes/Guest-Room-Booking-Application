@@ -1,12 +1,14 @@
-import React, { useState } from "react";
-import { Link,Navigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link,Navigate, useParams } from "react-router-dom";
 import Perks from "./Perks";
 import axios from "axios";
 import PhotosUploader from "./PhotosUploader";
 const Card = () => {
-   const [redirect,setredirect] =useState('')
+  const {id}=useParams();
+ console.log({id});
+   const [redirect,setredirect] =useState(false)
   const [title, setTitle] = useState('');
-  const [address, setaddress] = useState('');
+  const [address, setaddress] = useState(''); 
   const [description, setDescription] = useState('');
   const [perks, setPerks] = useState([]);
   const [maxGuest, setmaxGuest] = useState(1);
@@ -17,33 +19,62 @@ const Card = () => {
   const [Photos,setPhotos]=useState([]);
   const [bets,setBets]=useState(1);
   const [rooms,setRooms]=useState(1);
-  async function addnewplace(ev){
+  async function saveplace(ev){
    ev.preventDefault();
-   await axios.post('/place',{
-      title,
-      address,
-      Photos,
-      description,
-      perks,
-      maxGuest,
-      contactInfo,
-      price,
-      bets,
-      rooms,
-      MinimumDays,
-      MaximumDays,
-   });
-   setredirect('/HouseOwner');
+   const placesData={ title,
+    address,
+    Photos,
+    description,
+    perks,
+    maxGuest,
+    contactInfo,
+    price,
+    bets,
+    rooms,
+    MinimumDays,
+    MaximumDays};
+   if(id){
+    await axios.put('/place',{
+      id,  ...placesData,});
+   setredirect(true);
+   }
+   else{
+    await axios.post('/place',placesData);
+     setredirect(true);
+   }
+ };
 
- }
- if(redirect){
-   return <Navigate to={redirect}/>;
- }
+ useEffect(()=>{
+  if(!id){
+    return;
+  }
+  else{
+    axios.get('/places/'+id).then(response=>{
+      const {data}=response;
+      setTitle(data.title);
+      setaddress(data.address);
+      setDescription(data.description);
+      setPerks(data.perks);
+      setmaxGuest(data.maxGuest);
+      setcontactInfo(data.contactInfo);
+      setprice(data.price);
+      setBets(data.bets);
+      setRooms(data.rooms);
+      setMinimumDays(data.MinimumDays);
+      setMaximumDays(data.MaximumDays);
+      setPhotos(data.Photos);
+      
+    })
+  }
+},[id]) ;
 
+if(redirect){
+  return <Navigate to={'/HouseOwner'}/>;
+}
   return (
     <>
       <div className=" flex  justify-center align-middle items-center mt-10  ">
-        <form onSubmit={addnewplace} className="  flex flex-col justify-center align-middle  border-[1px] border-black p-5 bg-[#d5d5d5] rounded-md  gap-4 ">
+        <form onSubmit={saveplace} className="  flex flex-col justify-center align-middle  border-[1px] border-black p-5 bg-[#d5d5d5] rounded-md  gap-4 ">
           <h1>Name of the place :</h1>
           <input
             className=" border-[1px] border-black p-1 "

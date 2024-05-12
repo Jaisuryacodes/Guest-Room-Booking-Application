@@ -1,12 +1,15 @@
 import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
 
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useParams } from 'react-router-dom'
 // import { UserContext } from '../../../components/UserContext'
+
 const Content = () => {
+ 
 const [places,setPlaces]=useState();
-  
+
   useEffect(()=>{
+    
     if(!places){
   axios.get('/places').then(({data})=>{
     
@@ -15,6 +18,7 @@ const [places,setPlaces]=useState();
 
     }
 },[])
+
   return (
     <div className='  relative top-12 flex flex-col justify-center align-middle items-center'>
       <Link className='bg-purple-700 flex w-60 rounded-md text-white p-4 '  to={'NewForm'}>
@@ -28,7 +32,7 @@ const [places,setPlaces]=useState();
         <div className="w-[800px] ">
     {
       places?.map((place,index)=>{
-        return <div className="Place container  bg-[#bababa]  border-[1px] rounded border-[#7250aa] flex  align-middle items-center gap-3 mt-3 p-3  h-full">
+        return <div key={index} className="Place container  bg-[#bababa]  border-[1px] rounded border-[#7250aa] flex  align-middle items-center gap-3 mt-3 p-3  h-full">
       
        <img   className="border-[1px] border-[#a4a1a1] w-[200px] h-[170px] object-cover  bg-slate-400 rounded-md  " src={"http://localhost:4000/uploads/"+place.Photos[0]} alt="" />
      
@@ -54,9 +58,10 @@ const [places,setPlaces]=useState();
            </div>
             </div>
          
-          <div className="text-[24px] bg-[#009933] hover:bg-[#0039e6] rounded-sm px-3 text-white w-16">
-                 <button>edit</button>
-               </div> 
+          
+                 
+                 <Link className="text-[24px] bg-[#009933] hover:bg-[#0039e6] rounded-sm px-3 text-white w-16" to={'/HouseOwner/NewForm/'+place._id}>Edit</Link>
+              
         </div>
        </div>
       })
