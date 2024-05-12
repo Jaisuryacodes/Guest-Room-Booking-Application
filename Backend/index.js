@@ -170,7 +170,7 @@ app.get('/allPlace',async(req,res)=>{
 app.get('/places/:id',async(req, res)=>{
   const {id}=req.params;
   res.json(await Place.findById(id));
-
+ 
 });
   app.put('/place',async(req, res)=>{
     const {id,title,address,Photos,description,perks,maxGuest,contactInfo,price,bets,rooms,MinimumDays,MaximumDays,}=req.body;  
