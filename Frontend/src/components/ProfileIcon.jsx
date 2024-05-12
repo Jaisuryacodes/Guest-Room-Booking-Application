@@ -21,7 +21,7 @@ const ProfileIcon = () => {
   }
   return (
     <div onClick={menufn}>
-      <div className=" flex flex-col  ">
+      <div className=" flex flex-col cursor-pointer  ">
         <div className="bg-[#f5f7f6] flex p-2 gap-2 rounded-full justify-center align-middle items-center text-black">
           <img className="w-[30px]" src={avatorIcon} />
           {<div >{User?.name}</div>}

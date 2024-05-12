@@ -14,20 +14,20 @@ export  default function Perks({selected, onChange}){
     return (
         <>
         <div className="grid grid-cols-4 gap-2 ">
-            <label className='border-[1px] border-[#666262] p-2 rounded-xl bg-[#888] cursor-pointer     ' >
-               <input type="checkbox"  checked={selected.includes(" wifi ") } name=" wifi " onChange={handleCheckboxClick} /> 
+            <label className='border-[1px] border-[#666262] p-2 rounded-xl bg-[#888] cursor-pointer  flex gap-2   ' >
+               <input  className=' w-5 accent-[#009933]' type="checkbox"  checked={selected.includes(" wifi ") } name=" wifi " onChange={handleCheckboxClick} /> 
                <span>Wifi</span>
             </label>
-            <label className='border-[1px] border-[#111] p-2 rounded-xl bg-[#888] cursor-pointer   ' >
-               <input type="checkbox" checked={selected.includes( " Parking ")} name=" Parking " onChange={ handleCheckboxClick} /> 
+            <label className='border-[1px] border-[#111] p-2 rounded-xl bg-[#888] cursor-pointer flex gap-2     ' >
+               <input   className=' w-5 accent-[#009933]'  type="checkbox" checked={selected.includes( " Parking ")} name=" Parking " onChange={ handleCheckboxClick} /> 
                <span>parking</span>
             </label>
-            <label className='border-[1px] border-[#111] p-2 rounded-xl bg-[#888] cursor-pointer   ' >
-               <input type="checkbox" checked={selected.includes(" Tv ")} name=" Tv " onChange={ handleCheckboxClick} /> 
+            <label className='border-[1px] border-[#111] p-2 rounded-xl bg-[#888] cursor-pointer flex gap-2    ' >
+               <input   className=' w-5 accent-[#009933]' type="checkbox" checked={selected.includes(" Tv ")} name=" Tv " onChange={ handleCheckboxClick} /> 
                <span>TV</span>
             </label>
-            <label className='border-[1px] border-[#111] p-2 rounded-xl bg-[#888] cursor-pointer   ' >
-               <input type="checkbox" checked={selected.includes(" Playground")} name=" Playground" onChange={ handleCheckboxClick} /> 
+            <label className='border-[1px] border-[#111] p-2 rounded-xl bg-[#888] cursor-pointer flex gap-2    ' >
+               <input   className=' w-5 accent-[#009933]' type="checkbox" checked={selected.includes(" Playground")} name=" Playground" onChange={ handleCheckboxClick} /> 
                <span>Playground</span>
             </label>
           </div>

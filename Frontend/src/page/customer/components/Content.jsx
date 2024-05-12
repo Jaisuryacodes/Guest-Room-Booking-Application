@@ -38,7 +38,7 @@ const Content = () => {
        </div>
          </div>
           <div className="">
-           <Link to={'/Seemore'} className='p-1  text-white underline decoration-white flex  justify-center border-[#d9d8dc] border-[2px] bg-[#7250aa] '> See more</Link>
+           <Link to={'/Seemore/'+place._id} className='p-1  text-white underline decoration-white flex  justify-center border-[#d9d8dc] border-[2px] bg-[#7250aa] '> See more</Link>
               </div>
         </div>
     

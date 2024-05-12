@@ -4,7 +4,7 @@ import logo from "../assets/image.png"
 import location from "../assets/icons8-location.gif"
 const Menu = () => {
   return (
-    <div className=' fixed  w-full  flex justify-between align-middle items-center font-normal p-3 bg-[#7250aa] text-white '>
+    <div className='   w-full  flex justify-between align-middle items-center font-normal p-3 bg-[#7250aa] text-white '>
       <div className=" flex gap-2 text-[24px]  ">
          <img  className=" w-10" src={logo} alt="" />
          <Link to="/">        <h1 className='text-white'> SUMMER HOLIDAYS </h1></Link>

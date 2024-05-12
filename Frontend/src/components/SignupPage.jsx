@@ -27,7 +27,7 @@ const SignupPage = () => {
   return (
     <>
 
-<div className="  flex  flex-col justify-between  items-center text-[#1f6bb888] font-normal text-[24px] ">
+<div className="  flex  flex-col justify-between  items-center text-[#1f6bb888] font-normal text-[24px]  ">
 
 <div className="  relative mt-4  flex    justify-center align-middle items-center ">
 
@@ -56,7 +56,7 @@ X
    
            <div className=" bg-transparent outline-none  p-2 border-[1px] border-[#0c0c0c] flex gap-2  ">     
             <label htmlFor="Type" >Customer Type:</label>
-          <select className='bg-[#009933] rounded-sm text-white outline-none' name="Type" 
+          <select className='bg-[#009933] rounded-sm text-white outline-none ' name="Type" 
            value={Type} 
            onChange={ev=>setType(ev.target.value)}>
            <option value=""></option>

@@ -90,11 +90,11 @@ if(redirect){
             value={address}
             onChange={ev => setaddress(ev.target.value)}
           />
-          <PhotosUploader  addedPhoto={Photos} onChange={setPhotos}/>
+          <PhotosUploader  Photos={Photos} onChange={setPhotos}/>
           
           <h1>Description</h1>
 
-          <textarea className=" border-[1px] border-black p-1 "
+          <textarea className=" border-[1px] h-[100px] border-black p-1 "
            value={description}
            onChange={ev=>setDescription(ev.target.value)}
           />

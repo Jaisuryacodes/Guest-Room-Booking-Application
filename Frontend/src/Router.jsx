@@ -31,7 +31,7 @@ const Router = createBrowserRouter([
             element:<ForgetPage/> 
         },
         {
-            path:'/Seemore',
+            path:'/Seemore/:id',
             element:<SeeMore/>
 
         },
