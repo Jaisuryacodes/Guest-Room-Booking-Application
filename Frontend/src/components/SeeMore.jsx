@@ -57,9 +57,11 @@ const SeeMore = () => {
  <div className=" relative flex flex-col   gap-2 ">
  <img className="  h-[190px]   border-[1px] rounded border-[#89878c] object-cover " src={"http://localhost:4000/uploads/"+place.Photos[1]} alt="" />
 
- <img className="  h-[200px]   border-[1px] rounded border-[#89878c] object-cover " src={"http://localhost:4000/uploads/"+place.Photos[2]} alt="" />
-    <button onClick={onclickExtra} className='absolute bottom-2 left-10 text-[24px] flex align-middle items-center justify-center bg-[#3d2da7] hover:bg-[#0039e6] rounded-lg  px-3  text-white '> 
-  3+more..</button>
+ <div className="relative">
+  <img className="  h-[200px]  relative  border-[1px] rounded border-[#89878c] object-cover " src={"http://localhost:4000/uploads/"+place.Photos[2]} alt="" />
+      <button onClick={onclickExtra} className='absolute bottom-2 left-10 text-[24px] flex align-middle items-center justify-center bg-[#3d2da7] hover:bg-[#0039e6] rounded-lg  px-3  text-white '> 
+    3+more..</button>
+  </div>
 
  
  </div>

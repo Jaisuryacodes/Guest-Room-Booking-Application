@@ -55,7 +55,7 @@ export default function PhotosUploader( {Photos,onChange}){
           <div className=" flex flex-wrap gap-3 object-cover">
              {
                Photos.length >0 && Photos.map(link=>(
-                <div className="relative rounded-sm">
+                <div key={link} className="relative rounded-sm">
                      <img  className="w-[150px] h-[120px]  border-[1px] rounded-md border-[#7f5cda]" key={link} src={'http://localhost:4000/Uploads/'+link} alt="not found" />
                   
                      <button onClick={()=>removePhoto(link)} className=" cursor-pointer absolute bottom-1 right-1 text-white bg-[#009933] hover:bg-[#e61b00] p-1 rounded-xl">

@@ -2,7 +2,7 @@ import React from 'react'
 
 import SearchBox from '../components/SearchBox'
 import Footer from '../components/Footer'
-import Content from '../page/customer/components/Content.jsx'
+import Content from '../components/Content.jsx'
 import Menu from '../components/Menu'
 import { Outlet } from 'react-router-dom'
 const Homepage = () => {

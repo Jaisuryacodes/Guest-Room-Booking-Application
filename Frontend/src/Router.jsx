@@ -10,6 +10,8 @@ import HouseOwnerpage from "./Layout/HouseOwnerpage.jsx";
 import OwnerContent from './page/houseOwners/components/Content.jsx'
 import NewForm from './page/houseOwners/components/Card.jsx'
 import SeeMore from "./components/SeeMore.jsx";
+import Placedetails from "./page/customer/components/Placedetails.jsx";
+import Content from "./page/customer/components/Content.jsx";
 
 const Router = createBrowserRouter([
     {    
@@ -39,7 +41,19 @@ const Router = createBrowserRouter([
         {
             path:"/Customer",
             element:<Customerpage/>,
+            children:[
+                {
+                    path:'/Customer',
+                    element:<Content/>
+                },
+                {
+                    path:'/Customer/Placedetails/:id',
+                    element:<Placedetails/>
+                },
+            ]
+           
         },
+       
         {
         path:"/HouseOwner",
         element:<HouseOwnerpage/>,
@@ -59,7 +73,7 @@ const Router = createBrowserRouter([
                 element:<NewForm/>,
               },
             ]
-      },
+         },
       
       
   
