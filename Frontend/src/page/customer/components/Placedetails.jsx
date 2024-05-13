@@ -21,9 +21,29 @@ const Placedetails = () => {
     if(!place){
       return '';
     }
-     function onclickExtra(){
-     setRedirect(true);
-     }
+     if(redirect){
+     return  (
+     <>
+         <h1 className="text-2xl font-medium  p-4 fixed h-fit   w-full bg-gray-400 flex justify-center">
+         All Photos
+         </h1>
+         <button onClick={()=>setRedirect(false)}  className="text-xl font-medium  p-4 fixed  bg-gray-400 flex right-0"> x close</button>
+        <div className=" p-[80px] ">
+     <div className="  flex flex-col gap-4 p-[50px] justify-center align-middle items-center">
+        {
+            place?.Photos.length > 0 && place.Photos.map(photo=>(
+                       
+          <img title={place.title} className=" w-full h-[600px]  cursor-pointer border-[1px] rounded border-[#757476] object-cover " src={"http://localhost:4000/uploads/"+photo} alt="" />
+             
+
+            ))
+        }
+     </div>
+     
+     </div>
+     </>
+     );
+     };
     
     return (
       <>
@@ -56,7 +76,7 @@ const Placedetails = () => {
   
   <div className="relative">
   <img className="  h-[200px]  relative  border-[1px] rounded border-[#89878c] object-cover " src={"http://localhost:4000/uploads/"+place.Photos[2]} alt="" />
-      <button onClick={onclickExtra} className='absolute bottom-2 left-10 text-[24px] flex align-middle items-center justify-center bg-[#3d2da7] hover:bg-[#0039e6] rounded-lg  px-3  text-white '> 
+      <button onClick={()=>setRedirect(true)} className='absolute bottom-2 left-10 text-[24px] flex align-middle items-center justify-center bg-[#3d2da7] hover:bg-[#0039e6] rounded-lg  px-3  text-white '> 
     3+more..</button>
   </div>
   
@@ -92,7 +112,7 @@ const Placedetails = () => {
           <h1>{place.rooms}</h1>
           </div>
           <div className="flex gap-1  ">| 
-          <button onClick={onclickExtra} >🔴More</button>
+          <button  >🔴More</button>
           </div>
         </div>
        <div className="flex  flex-col  gap-3 justify-between ">
@@ -112,7 +132,7 @@ const Placedetails = () => {
   
    <div className="w-full flex  gap-3 justify-center align-middle items-center">
     <Link  className=' bg-[#ff3636] rounded-xl py-3 px-7  font-medium text-white mb-3' to={'/Customer'}>Back</Link>
-   <button className=' bg-[#ff3636] rounded-xl p-3 font-medium text-white mb-3' onClick={onclickExtra} >Booknow</button>
+   <button className=' bg-[#ff3636] rounded-xl p-3 font-medium text-white mb-3'  >Booknow</button>
    </div>
   
        </div>
