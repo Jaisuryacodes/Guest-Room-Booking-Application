@@ -32,7 +32,7 @@ const Router = createBrowserRouter([
         },
         {
             path:'/Seemore/:id',
-            element:<SeeMore/>
+            element:<SeeMore/>,
 
         },
        
