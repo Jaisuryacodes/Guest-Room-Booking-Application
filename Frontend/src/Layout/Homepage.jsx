@@ -9,11 +9,13 @@ const Homepage = () => {
   return (
     <>
    <Menu/>
+   <div className="px-[40px]">
    <Outlet/>
     <SearchBox/>
     
    <Content/>
 
+   </div>
     
     <Footer/>
    </>

@@ -102,8 +102,9 @@ const SeeMore = () => {
      
 </div>
 
- <div className="w-full flex justify-center align-middle items-center">
- <button className=' bg-[#ff3636] rounded-xl p-3 text-white mb-3' onClick={onclickExtra} >Booknow</button>
+ <div className="w-full flex  gap-3 justify-center align-middle items-center">
+  <Link  className=' bg-[#ff3636] rounded-xl py-3 px-7  font-medium text-white mb-3' to={'/'}>Back</Link>
+ <button className=' bg-[#ff3636] rounded-xl p-3 font-medium text-white mb-3' onClick={onclickExtra} >Booknow</button>
  </div>
 
      </div>
