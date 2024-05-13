@@ -183,20 +183,20 @@ app.get('/places/:id',async(req, res)=>{
       title,
       address,
       Photos,
-      description,
-      perks,
-      maxGuest,
+      description,  
+      perks,  
+      maxGuest,  
       contactInfo, 
       price,
       bets,
       rooms,
-      MinimumDays,
+      MinimumDays,  
       MaximumDays,   
      });
-  await  placeDoc.save();
+  await  placeDoc.save();  
     res.json('ok');
   }
  })
-  })
+  }); 
 app.listen(4000);
  
