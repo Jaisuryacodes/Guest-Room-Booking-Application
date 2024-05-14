@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Menu from './CustomerMenu.jsx'
 import { Link, Navigate, Outlet, useParams } from 'react-router-dom';
 import axios from 'axios';
+import Calendar from './Calendarc.tsx';
 
 const Placedetails = () => {
     const [redirect, setRedirect]=useState(false);
@@ -54,7 +55,7 @@ const Placedetails = () => {
       <>
      
       
-      <div className=" px-[40px] mt-[7%]  rounded-lg ">
+      <div className=" px-[40px] mt-[32px]  rounded-lg ">
   
     
      <div className="   bg-slate-300 rounded-lg  ">
@@ -78,12 +79,12 @@ const Placedetails = () => {
      
    <div className="   flex flex-col   gap-2 ">
    <img className="  h-[190px]   border-[1px] rounded border-[#89878c] object-cover " src={"http://localhost:4000/uploads/"+place.Photos[1]} alt="" />
-  
-  <div className="relative">
-  <img className="  h-[200px]  relative  border-[1px] rounded border-[#89878c] object-cover " src={"http://localhost:4000/uploads/"+place.Photos[2]} alt="" />
-      <button onClick={()=>setRedirect(true)} className='absolute bottom-2 left-10 text-[24px] flex align-middle items-center justify-center bg-[#3d2da7] hover:bg-[#0039e6] rounded-lg  px-3  text-white '> 
+  <div className="relative ">
+  <img className="  h-[200px]  border-[1px] rounded border-[#89878c] object-cover " src={"http://localhost:4000/uploads/"+place.Photos[2]} alt="" />
+      <button onClick={()=>setRedirect(true)} className=' absolute  bottom-2 left-10  text-[24px] flex align-middle items-center justify-center bg-[#3d2da7] hover:bg-[#0039e6] rounded-lg  px-3  text-white '> 
     3+more..</button>
   </div>
+
   
    
    </div>
@@ -134,12 +135,14 @@ const Placedetails = () => {
        </div>
        
   </div>
-  
+  <div className="p-9 ">
+  <Calendar  />
+  </div>
    <div className="w-full flex  gap-3 justify-center align-middle items-center">
     <Link  className=' bg-[#ff3636] rounded-xl py-3 px-7  font-medium text-white mb-3' to={'/Customer'}>Back</Link>
    <button className=' bg-[#ff3636] rounded-xl p-3 font-medium text-white mb-3'  >Booknow</button>
    </div>
-  
+   
        </div>
       
       </div>

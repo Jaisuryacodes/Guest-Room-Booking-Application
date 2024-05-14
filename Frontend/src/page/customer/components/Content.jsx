@@ -19,7 +19,7 @@ const Content = () => {
       return(
         <div key={index} className="  w-[280px] h-96 cardBox  bg-[#bababa] flex flex-col justify-center align-middle items-center p-2  border-[1px] rounded border-[#7250aa] gap-2 ">
 
-<img className=" w-[250px] h-[150px]   border-[1px] rounded border-[#7250aa] object-cover " src={"http://localhost:4000/uploads/"+place.Photos[0]} alt="" />
+        <img className=" w-[250px] h-[150px]   border-[1px] rounded border-[#7250aa] object-cover " src={"http://localhost:4000/uploads/"+place.Photos[0]} alt="" />
           <div className="" >  
            <h1 className='font-bold text-[18px]'>{place.title}</h1>
             <h2 className=" ">🗺 {place.address}</h2>
