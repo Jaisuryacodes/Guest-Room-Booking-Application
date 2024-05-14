@@ -194,9 +194,27 @@ app.get('/places/:id',async(req, res)=>{
       MaximumDays,   
      });
   await  placeDoc.save();  
-    res.json('ok');
-  }
+    res.json('ok'); 
+  } 
  })
   }); 
+  app.delete('/deletePlace/:id',(req,res)=>{
+    const {id}=req.params; 
+   
+     const {token}=req.cookies;
+
+     jwt.verify(token,jwtsecret,{},async(err,userData)=>{
+      const placeDoc=await Place.findById(id);
+       if(userData.id === placeDoc.owner.toString())
+        {
+          const Photos=placeDoc.Photos;
+          for(let i=0;i<Photos.length;i++){
+            fs.unlinkSync(__dirname+'/uploads/'+ Photos[i]);
+          }
+       await Place.findByIdAndDelete(id);
+        res.json('ok');  
+     
+        }});
+    })
 app.listen(4000);
- 
+  
