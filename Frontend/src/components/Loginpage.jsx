@@ -25,7 +25,7 @@ const Loginpage = () => {
             } else {
               setredirect("/HouseOwner");
             }
-          }, 1000);
+          }, 800);
         }
       })
       .catch((err) => {
@@ -48,7 +48,9 @@ const Loginpage = () => {
           >
             X
           </Link>
-          <h1 className=" mt-6">Welcome</h1>
+          <h1 className=" text-[#53399a]">{status} </h1>
+          <h1 className=" mt-2">Welcome</h1>
+         
           <form
             onSubmit={Login}
             className=" flex flex-col gap-[12px] items-center  text-[16px] text-[#0c0c0c]  "
@@ -86,7 +88,7 @@ const Loginpage = () => {
                 Login
               </button>
             </div>
-            <p>{status} </p>
+           
           </form>
         </div>
       </div>

@@ -97,7 +97,17 @@ const SeeMore = () => {
         <div className="flex gap-1  ">| 
         <button onClick={onclickExtra} >🔴More</button>
         </div>
+        
       </div>
+      <div className="flex  flex-col  gap-3 justify-between ">
+       <div className=" gap-2 bg-gray-400 rounded-xl w-fit p-3  justify-center align-middle items-center">
+            <h1>{place.perks}</h1>
+        </div>
+        <div className=" flex  bg-gray-400 rounded-xl w-fit p-3  justify-center align-middle items-center">
+            <h1> Minimum  Days : {place.MinimumDays}</h1>|
+            <h1> Maximum  Days : {place.MaximumDays}</h1>
+        </div>
+       </div>
        </div>
     
      </div>
