@@ -4,6 +4,7 @@ const bcrypt=require('bcrypt');
 const  jwt =require('jsonwebtoken');
 const User =require('./models/User.js');
 const Place=require('./models/Place.js');
+const Booking = require('./models/Booking.js');
 const cors =require('cors');
 const imageDownloader = require('image-downloader');
 const multer = require('multer');  
@@ -21,8 +22,8 @@ app.use(cors({
     credentials:true,
     origin:'http://localhost:5173'
 }))
-console.log(process.env.mongooseUrl)
-mongoose.connect(process.env.mongooseUrl)
+console.log(process.env.mongooseUrl);
+mongoose.connect(process.env.mongooseUrl);
 app.post('/Signup',async (req,res)=>{
   const {name,email,mobile,Type,password} = req.body;
   const userDoc= await User.findOne({email})
@@ -146,8 +147,7 @@ app.post('/place',(req, res) => {
     
   });
  
-})
-
+});
 app.get('/places',async(req,res)=>{
   const {token}=req.cookies;
    
@@ -165,8 +165,13 @@ app.get('/places',async(req,res)=>{
 });
 app.get('/allPlace',async(req,res)=>{
   const allPlace = await Place.find({});
+  if(allPlace.length){
   res.json(allPlace);
-})
+  }  
+ else{
+   res.json(null)
+ }
+  })
 app.get('/places/:id',async(req, res)=>{
   const {id}=req.params;
   res.json(await Place.findById(id));
@@ -196,17 +201,17 @@ app.get('/places/:id',async(req, res)=>{
   await  placeDoc.save();  
     res.json('ok'); 
   } 
- })
+ }) 
   }); 
+   
   app.delete('/deletePlace/:id',(req,res)=>{
     const {id}=req.params; 
    
      const {token}=req.cookies;
-
      jwt.verify(token,jwtsecret,{},async(err,userData)=>{
       const placeDoc=await Place.findById(id);
        if(userData.id === placeDoc.owner.toString())
-        {
+        { 
           const Photos=placeDoc.Photos;
           for(let i=0;i<Photos.length;i++){
             fs.unlinkSync(__dirname+'/uploads/'+ Photos[i]);
@@ -214,7 +219,36 @@ app.get('/places/:id',async(req, res)=>{
        await Place.findByIdAndDelete(id);
         res.json('ok');  
      
-        }});
-    })
+        }}); 
+    });
+
+ app.post('/bookings',async(req,res)=>{
+  const {
+    place,
+    email,
+    phone,
+    address,
+    fromdate,
+    todate,
+    noofdays,
+    prices,
+    idProof}=req.body;
+await Booking.create({
+  place,
+  email,
+  phone,
+  address,
+  fromdate,
+  todate,
+  noofdays,
+  prices,
+  idProof,
+  
+}).then((resDoc)=>{
+    res.json(resDoc);
+}).catch((err)=>{
+  throw err;
+})
+ })   
 app.listen(4000);
   
