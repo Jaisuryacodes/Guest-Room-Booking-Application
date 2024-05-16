@@ -1,0 +1,13 @@
+.custom-calendar {
+    background-color: rgb(255, 255, 255);
+    /* Add more custom styles here */
+    border-radius: 5px;
+    color: blueviolet;
+    font-size: 20px;
+    padding: 12px 12px ;
+  }
+  .custom-calendar
+  {    
+    /* color: rgb(20, 178, 33); */
+ 
+  }

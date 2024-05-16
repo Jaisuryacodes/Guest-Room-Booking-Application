@@ -3,11 +3,13 @@ import Menu from './CustomerMenu.jsx'
 import { Link, Navigate, Outlet, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Calendar from './Calendarc.tsx';
+import BookingForm from './BookingForm.jsx';
 
 const Placedetails = () => {
     const [redirect, setRedirect]=useState(false);
     const {id} =useParams();
     const [place,setPlace]=useState(null);
+    const [Booking,setBooking]=useState(false);
     useEffect(()=>{
       if(!id) {
         return;
@@ -51,6 +53,13 @@ const Placedetails = () => {
      );
      };
     
+     if(Booking){
+     return <>
+     <button onClick={()=>setBooking(false)} className=' bg-[#ff3636] rounded-xl p-3 font-medium text-white fixed ml-8'  >Back</button>
+     <BookingForm/>
+
+     </> 
+     }
     return (
       <>
      
@@ -75,12 +84,12 @@ const Placedetails = () => {
       <hr  className="  bg-slate-500  " />
   <div className="flex flex-col md:flex md:flex-row px-[40px]  gap-8   py-5">
   <div className=" flex flex-col md:flex md:flex-row    gap-2 ">
-    <img className="  h-[400px]  rounded border-[1px]  border-[#89878c] object-cover " src={"http://localhost:4000/uploads/"+place.Photos[0]} alt="" />
+    <img onClick={()=>setRedirect(true)} className="  h-[400px]  rounded border-[1px]  border-[#89878c] object-cover " src={"http://localhost:4000/uploads/"+place.Photos[0]} alt="" />
      
    <div className="   flex flex-col   gap-2 ">
-   <img className="  h-[190px]   border-[1px] rounded border-[#89878c] object-cover " src={"http://localhost:4000/uploads/"+place.Photos[1]} alt="" />
+   <img onClick={()=>setRedirect(true)} className="  h-[190px]   border-[1px] rounded border-[#89878c] object-cover " src={"http://localhost:4000/uploads/"+place.Photos[1]} alt="" />
   <div className="relative ">
-  <img className="  h-[200px]  border-[1px] rounded border-[#89878c] object-cover " src={"http://localhost:4000/uploads/"+place.Photos[2]} alt="" />
+  <img onClick={()=>setRedirect(true)} className="  h-[200px]  border-[1px] rounded border-[#89878c] object-cover " src={"http://localhost:4000/uploads/"+place.Photos[2]} alt="" />
       <button onClick={()=>setRedirect(true)} className=' absolute  bottom-2 left-10  text-[24px] flex align-middle items-center justify-center bg-[#3d2da7] hover:bg-[#0039e6] rounded-lg  px-3  text-white '> 
     3+more..</button>
   </div>
@@ -93,8 +102,8 @@ const Placedetails = () => {
        <div className=" w-[1px] bg-slate-500  ">&nbsp;</div>
        <div >
          <div className=" flex flex-col gap-3  " >
-           <h1 className="  font-semibold underline ">About the Place</h1>
-        <div className="w-[500px] text-[16px] "> {place.description }</div>
+         <h1 className="  font-semibold underline  text-xl">Details</h1>
+          
   
         <div className=" flex gap-2 bg-gray-400 rounded-xl w-fit p-3">
       <div className="flex gap-1">     
@@ -135,13 +144,19 @@ const Placedetails = () => {
        </div>
        
   </div>
-  <div className="p-9 ">
+  <hr />
+  <div className="p-9 flex  gap-3 justify-evenly align-middle items-center">
+<div className=" flex flex-col">
+<h1 className="  font-semibold underline ">About the Place</h1>
+        <div className="w-[500px] text-[16px] "> {place.description }</div>
+</div>
   <Calendar  />
-  </div>
-   <div className="w-full flex  gap-3 justify-center align-middle items-center">
+  <div className=" flex  gap-3 justify-center align-middle items-center">
     <Link  className=' bg-[#ff3636] rounded-xl py-3 px-7  font-medium text-white mb-3' to={'/Customer'}>Back</Link>
-   <button className=' bg-[#ff3636] rounded-xl p-3 font-medium text-white mb-3'  >Booknow</button>
+    <button onClick={()=>setBooking(true)} className=' bg-[#ff3636] rounded-xl p-3 font-medium text-white mb-3'  >Booknow</button>
    </div>
+  </div>
+  
    
        </div>
       
