@@ -1,42 +1,66 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+ import { differenceInCalendarDays,format, addDays } from 'date-fns';
 
 const BookingForm = () => {
     const {id} =useParams();
     const [err,setErr]=useState('');
+    const [place,setPlace] = useState('');
     const [name,setname]=useState('');
     const [email,setemail]=useState('');
     const [phone,setphone]=useState('');
     const [address,setaddress]=useState('');
-    const [totaldays,setTotaldays]=useState('1');
+    const [dayStatus,setdayStatus]=useState("false");
     const [fromdate,setFromdate]=useState('');
     const [todate,setTodate]=useState('');
     const [idProof,setIdproof]=useState('');
     const [maxdays,setMaxdays]=useState('');
+    const [price,setPrice]=useState('');
+    const [totalCost,setTotalCost]=useState('');
+    var noofdays=1;
     useEffect(()=>{
       
           axios.get('/places/'+id).then(response=>{
-            setMaxdays(response.data.MaximumDays);
+              setMaxdays(response.data.MaximumDays);
+              setPrice(response.data.price);
+            setPlace(response.data._id);
+            
             
           })
         
       },[id]);
+async function Booking(){
+    const response = await axios.post('/bookings',{ 
+        place,
+        email,
+        phone,
+        address,
+        fromdate,
+        todate,
+        noofdays,
+        prices:totalCost,
+        idProof,});
+        const bookingId =response.data._id;
+}
       function totaldaysChecker(){
-        if(totaldays==''){
-            setErr('Please enter no of days⚠')
-        }
-        else if(totaldays>maxdays){
-        setErr('Please check maximum days ⚠')
+      if(noofdays>maxdays){
+        setErr('Please check maximum days ⚠'+noofdays  )
+        setdayStatus('false');
         }
         else {
-            setErr('valid');
+            setErr('valid ✔'+ noofdays );
+            setdayStatus('true');
+            setTotalCost(noofdays*price);
         }
+      }
+      if(fromdate && todate ){
+        noofdays= differenceInCalendarDays(new Date(todate),new Date(fromdate));
       }
   return (
    <>
     <div className=" flex  justify-center align-middle items-center p-8">
-        <form className=" flex  flex-col justify-center align-middle  gap-4">
+        <form className=" flex  flex-col justify-center align-middle  gap-4" onSubmit={Booking}>
             <h1>Name :</h1>
             <input className='border-[2px] border-[#000] p-1' type="text"placeholder='Name' 
                 value={name}
@@ -57,17 +81,7 @@ const BookingForm = () => {
                 value={address}
                 onChange={ev=>setaddress(ev.target.value)}
             />
-            <h1>No of days / <span className='text-[#4658c0] text-lg underline'> Maximum no of days :{maxdays}</span></h1>
-            <h3>{err=='valid'? 
-            <span  className='text-[#009933] text-lg underline'>{err+'✔'} </span>:
-            <span  className='text-[#ff3636] text-lg underline'>{err}</span>}
-            </h3>
-            <input  className='border-[2px] border-[#000] p-1' type="Number"placeholder='No of days' 
-            value={totaldays}
-            onKeyUp={totaldaysChecker}
-            onChange={ev=>setTotaldays(ev.target.value)}
            
-            />
             <h1> Booking Date : </h1>
             <div className="flex gap-2 justify-center align-middle items-center">
             <h1> From Date :</h1>
@@ -79,13 +93,24 @@ const BookingForm = () => {
             <input  className='border-[2px] border-[#000] p-1' type="Date"placeholder='To Date'
                 value={todate}
                 onChange={ev=>setTodate(ev.target.value)}
-            />
+                
+           />
             </div>
+           <span onClick={totaldaysChecker} className='bg-red-500 text-white p-2 rounded-sm w-fit'>Total Price and total days</span>
+
+            <h1>No of days / <span className='text-[#4658c0] text-lg underline'> Maximum no of days :{maxdays}</span></h1>
+            <h3>{dayStatus=='true'? 
+            <span  className='text-[#009933] text-lg underline'>{err} </span>:
+            <span  className='text-[#ff3636] text-lg underline'>{err} </span>}
+            </h3>
+          <h1 className='text-xl '>Total Cost : <span className='text-xl text-[#fcfbfc] bg-[#009933] p-2 rounded-md w-fit'>₹  {totalCost}</span></h1>
+           
             <h1>Id Proof ( Aadhaar card)</h1>
             <input  className='border-[2px] border-[#000] p-1' type="text"placeholder='1234 1234 1234' maxLength={12} minLength={12}
                 value={idProof}
                 onChange={ev=>setIdproof(ev.target.value)}
             />
+            <button type='submit'>submit</button>
         </form>
     </div>
    </>

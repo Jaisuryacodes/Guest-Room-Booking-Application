@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Menu from './CustomerMenu.jsx'
 import { Link, Navigate, Outlet, useParams } from 'react-router-dom';
 import axios from 'axios';
-import Calendar from './Calendarc.tsx';
+import Calendar from './Calendarc.jsx';
 import BookingForm from './BookingForm.jsx';
 
 const Placedetails = () => {
