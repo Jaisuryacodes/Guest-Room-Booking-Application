@@ -55,7 +55,12 @@ const Placedetails = () => {
     
      if(Booking){
      return <>
-     <button onClick={()=>setBooking(false)} className=' bg-[#ff3636] rounded-xl p-3 font-medium text-white fixed ml-8'  >Back</button>
+     <button onClick={()=>setBooking(false)} className=' bg-[#ff3636] rounded-xl p-3 font-medium text-white fixed ml-8 w-fit flex gap-2'  >
+     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+</svg>
+
+      Back</button>
      <BookingForm/>
 
      </> 
@@ -152,7 +157,12 @@ const Placedetails = () => {
 </div>
   <Calendar  />
   <div className=" flex  gap-3 justify-center align-middle items-center">
-    <Link  className=' bg-[#ff3636] rounded-xl py-3 px-7  font-medium text-white mb-3' to={'/Customer'}>Back</Link>
+    <Link  className=' bg-[#ff3636] rounded-xl py-3 px-2  font-medium text-white mb-3 flex gap-2 justify-center align-middle items-center' to={'/Customer'}>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+</svg>
+
+      Back</Link>
     <button onClick={()=>setBooking(true)} className=' bg-[#ff3636] rounded-xl p-3 font-medium text-white mb-3'  >Booknow</button>
    </div>
   </div>
