@@ -13,6 +13,7 @@ import SeeMore from "./components/SeeMore.jsx";
 import Placedetails from "./page/customer/components/Placedetails.jsx";
 import Content from "./page/customer/components/Content.jsx";
 import Mybookings from "./page/customer/components/Mybookings.jsx";
+import BookingReq from "./page/houseOwners/components/BookingReq.jsx";
 
 const Router = createBrowserRouter([
     {    
@@ -76,6 +77,10 @@ const Router = createBrowserRouter([
             {
                 path:'/HouseOwner/NewForm/:id',
                 element:<NewForm/>,
+              },
+              {
+                path:'/HouseOwner/Bookingreq',
+                element:<BookingReq/>
               },
             ]
          },

@@ -18,12 +18,17 @@ const ProfileIcon = () => {
   }
   async function bookings(ev){
     ev.preventDefault();
-    
+    if( User?.Type=='customer'){
     setRedirect('/Customer/bookings');
+    }
+    else{
+      setRedirect('/HouseOwner/bookingReq');
+    }
   }
   if(Redirect){
     return <Navigate to ={Redirect}/>
   }
+  
   return (
     <div onClick={menufn}>
       <div className=" flex flex-col cursor-pointer  ">
