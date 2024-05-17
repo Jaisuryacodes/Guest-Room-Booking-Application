@@ -27,21 +27,22 @@ const Placedetails = () => {
      if(redirect){
      return  (
      <>
-         <h1 className="text-2xl font-medium  p-4 fixed h-fit   w-full bg-[#7250aa] flex justify-center text-white">
-         All Photos
-         </h1>
+         
          <button onClick={()=>setRedirect(false)}  className="text-xl   font-medium  p-3 mt-2 text-[#000000] hover:text-[#fff] fixed  bg-[#ffffff] hover:bg-[#3e3b3b] flex right-3 justify-center align-middle gap-1 items-center border-[1px] border-[#8b8b8b] rounded-xl"> 
          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
   <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
 </svg>
 
           close</button>
+          <h1 className="text-2xl font-medium   mt-0 p-4  h-fit s   w-full bg-[#7250aa] flex justify-center text-white">
+         All Photos
+         </h1>
         <div className=" p-[80px] ">
      <div className="  flex flex-col gap-4 p-[50px] justify-center align-middle items-center">
         {
             place?.Photos.length > 0 && place.Photos.map(photo=>(
                        
-          <img title={place.title} className=" w-full h-[600px]  cursor-pointer border-[1px] rounded border-[#757476] object-cover " src={"http://localhost:4000/uploads/"+photo} alt="" />
+              <img title={place.title} className=" w-full h-[600px]  cursor-pointer border-[1px] rounded border-[#757476] object-cover " src={"http://localhost:4000/uploads/"+photo} alt="" />
              
 
             ))
@@ -61,7 +62,8 @@ const Placedetails = () => {
 </svg>
 
       Back</button>
-     <BookingForm/>
+
+   <div className="">     <BookingForm/></div>
 
      </> 
      }

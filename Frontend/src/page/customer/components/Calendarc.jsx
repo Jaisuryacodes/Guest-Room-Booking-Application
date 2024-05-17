@@ -8,7 +8,7 @@ const Calendarc = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const startDate = new Date("2024-05-16"); // May 1, 2024
   const endDate = new Date("2024-05-19");
-  var disabledDates=[ ]
+  var disabledDates=[ ];
   const getSequentialDates = (startDate, endDate) => {
   //  const dates=[];
     let currentDate = startDate;

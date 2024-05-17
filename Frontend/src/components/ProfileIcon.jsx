@@ -16,6 +16,11 @@ const ProfileIcon = () => {
    await axios.post('/logout' );
    setRedirect('/');
   }
+  async function bookings(ev){
+    ev.preventDefault();
+    
+    setRedirect('/Customer/bookings');
+  }
   if(Redirect){
     return <Navigate to ={Redirect}/>
   }
@@ -29,7 +34,9 @@ const ProfileIcon = () => {
          
         </div>  
         {menucard ? (
-          <div className=" px-5 absolute top-16 right-5 bg-[#3cf94f] rounded-md text-black">
+          <div className=" p-2 flex flex-col absolute top-16 right-5 bg-[#3cf94f] rounded-md text-black border-[1px] border-[#676767]">
+            <button onClick={(ev)=>{bookings(ev)}} >Bookings</button>
+            <div className="bg-black text-[1px] w-full mt-1 mb-1"> &nbsp; </div>
             <button onClick={logout} > Logout</button>
           </div>
         ) : (

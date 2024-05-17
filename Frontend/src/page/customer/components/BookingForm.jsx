@@ -1,12 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
  import { differenceInCalendarDays,format, addDays } from 'date-fns';
 
 const BookingForm = () => {
     const {id} =useParams();
     const [err,setErr]=useState('');
     const [place,setPlace] = useState('');
+    const [owner ,setOwnerId] = useState('');
     const [name,setname]=useState('');
     const [email,setemail]=useState('');
     const [phone,setphone]=useState('');
@@ -18,6 +19,7 @@ const BookingForm = () => {
     const [maxdays,setMaxdays]=useState('');
     const [price,setPrice]=useState('');
     const [totalCost,setTotalCost]=useState('');
+    const [ bookingId, setbookingId]=useState('');
     var noofdays=1;
     useEffect(()=>{
       
@@ -25,14 +27,18 @@ const BookingForm = () => {
               setMaxdays(response.data.MaximumDays);
               setPrice(response.data.price);
             setPlace(response.data._id);
+            setOwnerId(response.data.owner);
             
             
           })
         
       },[id]);
-async function Booking(){
+async function Booking(ev){
+    ev.preventDefault();
     const response = await axios.post('/bookings',{ 
         place,
+        owner,
+        name,
         email,
         phone,
         address,
@@ -41,7 +47,7 @@ async function Booking(){
         noofdays,
         prices:totalCost,
         idProof,});
-        const bookingId =response.data._id;
+         setbookingId (response.data._id);
 }
       function totaldaysChecker(){
       if(noofdays>maxdays){
@@ -57,10 +63,13 @@ async function Booking(){
       if(fromdate && todate ){
         noofdays= differenceInCalendarDays(new Date(todate),new Date(fromdate));
       }
+      if(bookingId){
+        return <Navigate to={'/Customer/bookings'}/>
+      }
   return (
    <>
     <div className=" flex  justify-center align-middle items-center p-8">
-        <form className=" flex  flex-col justify-center align-middle  gap-4" onSubmit={Booking}>
+        <form className=" flex  flex-col justify-center align-middle  gap-4" onSubmit={(ev)=>{Booking(ev)}} >
             <h1>Name :</h1>
             <input className='border-[2px] border-[#000] p-1' type="text"placeholder='Name' 
                 value={name}
@@ -110,7 +119,7 @@ async function Booking(){
                 value={idProof}
                 onChange={ev=>setIdproof(ev.target.value)}
             />
-            <button type='submit'>submit</button>
+            <button type='submit' >submit</button>
         </form>
     </div>
    </>

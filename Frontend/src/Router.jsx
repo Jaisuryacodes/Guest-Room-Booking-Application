@@ -12,6 +12,7 @@ import NewForm from './page/houseOwners/components/Card.jsx'
 import SeeMore from "./components/SeeMore.jsx";
 import Placedetails from "./page/customer/components/Placedetails.jsx";
 import Content from "./page/customer/components/Content.jsx";
+import Mybookings from "./page/customer/components/Mybookings.jsx";
 
 const Router = createBrowserRouter([
     {    
@@ -44,16 +45,20 @@ const Router = createBrowserRouter([
             children:[
                 {
                     path:'/Customer',
-                    element:<Content/>
+                    element:<Content/>,
                 },
                 {
                     path:'/Customer/Placedetails/:id',
-                    element:<Placedetails/>
+                    element:<Placedetails/>,
+                },
+                {
+                    path:"/Customer/bookings",
+                    element:<Mybookings/>,
                 },
             ]
            
         },
-       
+         
         {
         path:"/HouseOwner",
         element:<HouseOwnerpage/>,
