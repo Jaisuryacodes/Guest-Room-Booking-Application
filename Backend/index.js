@@ -17,6 +17,17 @@ const bcryptSalt=bcrypt.genSaltSync(10);
 const jwtsecret ="njiokm0985vgyxdrtfc54321qazxsw"
 app.use(express.json());
 app.use(cookieParser());
+
+function getuserDataFromReq(req){
+  return new Promise((resolve,reject)=>{
+  jwt.verify(req.cookies.token,jwtsecret,{},async(err,userData)=>{
+    if(err) throw err;
+    resolve(userData);
+  });
+    
+  });
+  }
+ 
 app.use('/uploads',express.static(__dirname+'/uploads/'));
 app.use(cors({
     credentials:true,
@@ -204,7 +215,7 @@ app.get('/places/:id',async(req, res)=>{
  }) 
   }); 
    
-  app.delete('/deletePlace/:id',(req,res)=>{
+  app.delete('/deletePlace/:id',(req,res)=>{ 
     const {id}=req.params; 
    
      const {token}=req.cookies;
@@ -223,32 +234,59 @@ app.get('/places/:id',async(req, res)=>{
     });
 
  app.post('/bookings',async(req,res)=>{
+  const userData= await getuserDataFromReq(req);
   const {
+    owner,
     place,
     email,
-    phone,
+    phone, 
     address,
     fromdate,
-    todate,
-    noofdays,
+    todate, 
+    noofdays, 
     prices,
     idProof}=req.body;
 await Booking.create({
   place,
+  user:userData.id,
+  owner,
   email,
   phone,
   address,
   fromdate,
   todate,
-  noofdays,
+  noofdays, 
   prices,
   idProof,
-  
+   
 }).then((resDoc)=>{
     res.json(resDoc);
 }).catch((err)=>{
   throw err;
 })
- })   
-app.listen(4000);
+ });
+ 
+ 
+ app.get('/bookings',async(req,res)=>{
+  const userData= await getuserDataFromReq(req);
+  res.json(await Booking.find({user:userData.id}).populate('place'));
+ 
+ });   
+ app.delete('/deletebooking/:id',async(req,res)=>{
+ 
+  const {id}=req.params;  
+   
+     const {token}=req.cookies;
+     jwt.verify(token,jwtsecret,{},async(err,userData)=>{
+      const BookingDoc=await Booking.findById(id);
+       if(userData.id === BookingDoc.owner.toString());
+        { 
+       await Booking.findByIdAndDelete(id);
+        res.json('ok');  
+     
+        }}); 
+       
+
+  });
+app.listen(4000); 
   

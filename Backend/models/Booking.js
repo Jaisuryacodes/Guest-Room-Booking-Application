@@ -1,6 +1,9 @@
 const mongoose =require('mongoose');
     const bookingSchema=new mongoose.Schema({
-       place:{type:String},
+       place:{type:mongoose.Schema.Types.ObjectId,ref:'Place'},
+       user:{type:mongoose.Schema.Types.ObjectId,},
+       owner:{type:mongoose.Schema.Types.ObjectId,},
+       name:{type:String},
        email:{
         type:String,
        },
@@ -10,7 +13,7 @@ const mongoose =require('mongoose');
        address:{
         type:String,
        },
-       formdata:{
+       fromdate:{
         type:String,
        },
        todate:{
