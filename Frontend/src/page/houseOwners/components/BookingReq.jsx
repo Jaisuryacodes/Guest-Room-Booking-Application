@@ -5,11 +5,12 @@ const BookingReq = () => {
     const [bookings,setBookings]=useState([]);
   
     useEffect(()=>{
-      axios.get('/bookings').then(res=>{
+      axios.get('/bookingsReq').then(res=>{
          setBookings(res.data);
       
     });
-  },[])
+  },[]);
+
   function cancelBooking (id){    
       axios.delete('/deletebooking/'+id).then(()=>{
        window.location.reload(false);

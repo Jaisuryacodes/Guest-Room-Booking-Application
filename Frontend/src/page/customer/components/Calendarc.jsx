@@ -4,11 +4,29 @@ import 'react-calendar/dist/Calendar.css';
 import './Calandar.css'
 import { format, isSameDay,addDays } from 'date-fns';
 
-const Calendarc = () => {
+const Calendarc = ({ bookings }) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const startDate = new Date("2024-05-16"); // May 1, 2024
   const endDate = new Date("2024-05-19");
   var disabledDates=[ ];
+
+  // bookings = [
+  //   {
+  //     start: "2024-05-16",
+  //     end:"2024-05-19",
+  //   },
+  //   {
+  //     start: "2024-05-16",
+  //     end:"2024-05-19",
+  //   }
+  // ]
+
+  // bookings.forEach((booking)={'
+    // const startDate = booking.start;
+    // const endDate = booking.end;
+    // getSequentialDates(startDate, endDate)
+  // })
+
   const getSequentialDates = (startDate, endDate) => {
   //  const dates=[];
     let currentDate = startDate;

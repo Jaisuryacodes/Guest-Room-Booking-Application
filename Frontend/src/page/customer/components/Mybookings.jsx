@@ -9,7 +9,7 @@ const Mybookings = () => {
   useEffect(()=>{
     axios.get('/bookings').then(res=>{
        setBookings(res.data);
-    
+     
   });
 },[])
 function cancelBooking (id){    

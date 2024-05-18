@@ -10,6 +10,16 @@ const Placedetails = () => {
     const {id} =useParams();
     const [place,setPlace]=useState(null);
     const [Booking,setBooking]=useState(false);
+    const [BookingsRes,setBookingsRes]=useState('');
+
+
+ 
+    useEffect(()=>{
+      axios.get('/bookings').then(res=>{
+         setBookingsRes(res.data);
+       
+    });
+  },[])
     useEffect(()=>{
       if(!id) {
         return;
