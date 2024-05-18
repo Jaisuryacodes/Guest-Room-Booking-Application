@@ -101,7 +101,7 @@ app.get('/Profile',(req,res)=>{
        });
     });
    }
-   else{
+   else{  
     res.json(null)
    }
   
@@ -271,16 +271,21 @@ await Booking.create({
   const userData= await getuserDataFromReq(req);
   res.json(await Booking.find({user:userData.id}).populate('place'));
  
- });   
- app.delete('/deletebooking/:id',async(req,res)=>{
+ });  
+// booking endpoint for HouseOwner Section 
+ app.get('/bookingsReq',async(req,res)=>{ 
+
+  const userData= await getuserDataFromReq(req);
+  res.json(await Booking.find({owner:userData.id}).populate('place'));
  
-  const {id}=req.params;  
-   
-     const {token}=req.cookies;
+ });    
+ app.delete('/deletebooking/:id',async(req,res)=>{
+  const {id}=req.params; 
+     const {token}=req.cookies; 
      jwt.verify(token,jwtsecret,{},async(err,userData)=>{
       const BookingDoc=await Booking.findById(id);
        if(userData.id === BookingDoc.owner.toString());
-        { 
+        {  
        await Booking.findByIdAndDelete(id);
         res.json('ok');  
      
@@ -289,4 +294,4 @@ await Booking.create({
 
   });
 app.listen(4000); 
-  
+    
