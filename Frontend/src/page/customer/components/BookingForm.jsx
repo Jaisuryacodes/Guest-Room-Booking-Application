@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Navigate, useParams } from 'react-router-dom';
- import { differenceInCalendarDays,format, addDays } from 'date-fns';
+ import { differenceInCalendarDays,format, addDays, isValid } from 'date-fns';
 
 const BookingForm = () => {
     const {id} =useParams();
@@ -20,6 +20,7 @@ const BookingForm = () => {
     const [price,setPrice]=useState('');
     const [totalCost,setTotalCost]=useState('');
     const [ bookingId, setbookingId]=useState('');
+    const [bookingbutton,setbookingbutton]=useState('true');
     var noofdays=1;
     useEffect(()=>{
       
@@ -63,67 +64,144 @@ async function Booking(ev){
       if(fromdate && todate ){
         noofdays= differenceInCalendarDays(new Date(todate),new Date(fromdate));
       }
+      useEffect(()=>{
+
+     if(isValid(new Date(fromdate)) && isValid(new Date(todate)))
+            totaldaysChecker();
+      },[fromdate,todate]);
+
       if(bookingId){
-        return <Navigate to={'/Customer/bookings'}/>
+        return <Navigate to={"/Customer/bookings"} />;
       }
+
+
   return (
-   <>
-    <div className=" flex  justify-center align-middle items-center p-8">
-        <form className=" flex  flex-col justify-center align-middle  gap-4" onSubmit={(ev)=>{Booking(ev)}} >
-            <h1>Name :</h1>
-            <input className='border-[2px] border-[#000] p-1' type="text"placeholder='Name' 
-                value={name}
-                onChange={ev=>setname(ev.target.value)}
-            />
-            <h1>Email :</h1>
-            <input  className='border-[2px] border-[#000] p-1' type="text"placeholder='Email' 
-                value={email}
-                onChange={ev=>setemail(ev.target.value)}
-                />
-            <h1>Phone :</h1>
-            <input  className='border-[2px] border-[#000] p-1' type="text"placeholder='Phone' 
-                value={phone}
-                onChange={ev=>setphone(ev.target.value)}
-            />
-            <h1>Address :</h1>
-            <input  className='border-[2px] border-[#000] p-1' type="text"placeholder='Address' 
-                value={address}
-                onChange={ev=>setaddress(ev.target.value)}
-            />
-           
-            <h1> Booking Date : </h1>
-            <div className="flex gap-2 justify-center align-middle items-center">
+    <>
+      <div className=" flex  justify-center align-middle items-center p-8">
+        <form
+          className=" flex  flex-col justify-center align-middle  gap-4"
+          onSubmit={(ev) => {
+            Booking(ev);
+          }}
+        >
+          <h1>Name :</h1>
+          <input
+            className="border-[2px] border-[#000] p-1"
+            type="text"
+            placeholder="Name"
+            value={name}
+            onChange={(ev) => setname(ev.target.value)}
+          />
+          <h1>Email :</h1>
+          <input
+            className="border-[2px] border-[#000] p-1"
+            type="text"
+            placeholder="Email"
+            value={email}
+            onChange={(ev) => setemail(ev.target.value)}
+          />
+          <h1>Phone :</h1>
+          <input
+            className="border-[2px] border-[#000] p-1"
+            type="text"
+            placeholder="Phone"
+            value={phone}
+            onChange={(ev) => setphone(ev.target.value)}
+          />
+          <h1>Address :</h1>
+          <input
+            className="border-[2px] border-[#000] p-1"
+            type="text"
+            placeholder="Address"
+            value={address}
+            onChange={(ev) => setaddress(ev.target.value)}
+          />
+          <h1>Id Proof ( Aadhaar card)</h1>
+          <input
+            className="border-[2px] border-[#000] p-1"
+            type="text"
+            placeholder="1234 1234 1234"
+            maxLength={12}
+            minLength={12}
+            value={idProof}
+            onChange={(ev) => setIdproof(ev.target.value)}
+          />
+          <h1> Booking Date : </h1>
+          <div className="flex gap-2 justify-center align-middle items-center">
             <h1> From Date :</h1>
-            <input  className='border-[2px] border-[#000] p-1' type="Date"placeholder='From Date' 
-                value={fromdate}
-                onChange={ev=>setFromdate(ev.target.value)}
+            <input
+              className="border-[2px] border-[#000] p-1"
+              type="Date"
+              placeholder="From Date"
+              value={fromdate}
+              onChange={(ev) => setFromdate(ev.target.value)}
             />
             <h1> To Date :</h1>
-            <input  className='border-[2px] border-[#000] p-1' type="Date"placeholder='To Date'
-                value={todate}
-                onChange={ev=>setTodate(ev.target.value)}
-                
-           />
-            </div>
-           <span onClick={totaldaysChecker} className='bg-red-500 text-white p-2 rounded-sm w-fit'>Total Price and total days</span>
-
-            <h1>No of days / <span className='text-[#4658c0] text-lg underline'> Maximum no of days :{maxdays}</span></h1>
-            <h3>{dayStatus=='true'? 
-            <span  className='text-[#009933] text-lg underline'>{err} </span>:
-            <span  className='text-[#ff3636] text-lg underline'>{err} </span>}
-            </h3>
-          <h1 className='text-xl '>Total Cost : <span className='text-xl text-[#fcfbfc] bg-[#009933] p-2 rounded-md w-fit'>₹  {totalCost}</span></h1>
-           
-            <h1>Id Proof ( Aadhaar card)</h1>
-            <input  className='border-[2px] border-[#000] p-1' type="text"placeholder='1234 1234 1234' maxLength={12} minLength={12}
-                value={idProof}
-                onChange={ev=>setIdproof(ev.target.value)}
+            <input
+              className="border-[2px] border-[#000] p-1"
+              type="Date"
+              placeholder="To Date"
+              value={todate}
+              onChange={(ev) => setTodate(ev.target.value)}
             />
-            <button type='submit' >submit</button>
+          </div>
+
+          <h1>
+            <span className="text-[#4658c0] text-lg underline">
+              {" "}
+              Maximum no of days :{maxdays}
+            </span>
+          </h1>
+          <h3>
+            {dayStatus == "true" ? (
+              <span
+                className="text-[#009933] text-lg underline"
+                // onChange={setbookingbutton('true')}
+              >
+                {err}{" "}
+              </span>
+            ) : (
+              <span
+                className="text-[#ff3636] text-lg underline"
+            //    { setbookingbutton("false")}
+              >
+                {err}{" "}
+              </span>
+            )}
+          </h3>
+          <span
+            onClick={totaldaysChecker}
+            className="bg-red-500 text-white p-2 rounded-sm w-fit"
+          >
+            Total Price and total days
+          </span>
+          <h1 className="text-xl ">
+            Total Cost :{" "}
+            <span className="text-xl text-[#fcfbfc] bg-[#009933] p-2 rounded-md w-fit">
+              ₹ {totalCost}
+            </span>
+          </h1>
+
+          {bookingbutton =='true' ? (
+            <button
+              type="submit"
+              className="bg-red-500 hover:bg-[#00fd1e] text-white p-2 rounded-sm w-fit"
+            >
+              Book Now
+            </button>
+          ) : (
+            <button
+              type="submit"
+              className="bg-red-500 hover:bg-slate-600 text-white p-2 rounded-sm w-fit "
+              disabled
+            >
+              Book Now
+            </button>
+          )}
         </form>
-    </div>
-   </>
-  )
+      </div>
+    </>
+  );
 }
 
 export default BookingForm

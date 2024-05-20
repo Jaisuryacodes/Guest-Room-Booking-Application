@@ -21,8 +21,8 @@ const ProfileIcon = () => {
     if( User?.Type=='customer'){
     setRedirect('/Customer/bookings');
     }
-    else{
-      setRedirect('/HouseOwner/bookingReq');
+    else if (User?.Type != "customer") {
+      setRedirect("/HouseOwner/bookingReq");
     }
   }
   if(Redirect){

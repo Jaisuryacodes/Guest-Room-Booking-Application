@@ -6,8 +6,9 @@ import { format, isSameDay,addDays } from 'date-fns';
 
 const Calendarc = ({ bookings }) => {
   const [selectedDate, setSelectedDate] = useState(null);
-  const startDate = new Date("2024-05-16"); // May 1, 2024
-  const endDate = new Date("2024-05-19");
+//  console.log(fromdate);
+  // const startDate = new Date(fromdate); // May 1, 2024
+  // const endDate = new Date(todate);
   var disabledDates=[ ];
 
   // bookings = [
@@ -21,25 +22,26 @@ const Calendarc = ({ bookings }) => {
   //   }
   // ]
 
-  // bookings.forEach((booking)={'
-    // const startDate = booking.start;
-    // const endDate = booking.end;
-    // getSequentialDates(startDate, endDate)
-  // })
-
-  const getSequentialDates = (startDate, endDate) => {
-  //  const dates=[];
-    let currentDate = startDate;
   
-    while (currentDate <= endDate) {
-      disabledDates.push(format(currentDate, 'yyyy-MM-dd'));
-      currentDate = addDays(currentDate, 1);
-    }
+    const getSequentialDates = (startDate, endDate) => {
+    //  const dates=[];
+      let currentDate = startDate;
+    
+      while (currentDate <= endDate) {
+        disabledDates.push(format(currentDate, 'yyyy-MM-dd'));
+        currentDate = addDays(currentDate, 1);
+      }
+    
+      return disabledDates;
+    };
+  bookings.forEach((booking)=>{
+    const startDate = new Date (booking.fromdate);
+    const endDate = new Date (booking.todate);
   
-    return disabledDates;
-  };
+    getSequentialDates(startDate, endDate);
+  })
  
-  getSequentialDates(startDate, endDate);// Array of dates to disable
+  // getSequentialDates(startDate, endDate);// Array of dates to disable
 
   // Function to check if a date should be disabled
   const isDateDisabled = (date) => {

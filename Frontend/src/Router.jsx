@@ -16,79 +16,70 @@ import Mybookings from "./page/customer/components/Mybookings.jsx";
 import BookingReq from "./page/houseOwners/components/BookingReq.jsx";
 
 const Router = createBrowserRouter([
-    {    
-            path:"/",
-            element: <Homepage/>,
-         errorElement:<Error/>,
-         children:[ 
-            {
-                path:"/Login",
-            element:<Loginpage/>  
-            },
-            {
-                path:"/Signup",
-                element:<SignupPage/>
-            },]
-        },
-       {
-            path:"/forgetpassword",
-            element:<ForgetPage/> 
-        },
-        {
-            path:'/Seemore/:id',
-            element:<SeeMore/>,
+  {
+    path: "/",
+    element: <Homepage />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: "/Login",
+        element: <Loginpage />,
+      },
+      {
+        path: "/Signup",
+        element: <SignupPage />,
+      },
+    ],
+  },
+  {
+    path: "/forgetpassword",
+    element: <ForgetPage />,
+  },
+  {
+    path: "/Seemore/:id",
+    element: <SeeMore />,
+  },
 
-        },
-       
-        {
-            path:"/Customer",
-            element:<Customerpage/>,
-            children:[
-                {
-                    path:'/Customer',
-                    element:<Content/>,
-                },
-                {
-                    path:'/Customer/Placedetails/:id',
-                    element:<Placedetails/>,
-                },
-                {
-                    path:"/Customer/bookings",
-                    element:<Mybookings/>,
-                },
-            ]
-           
-        },
-         
-        {
-        path:"/HouseOwner",
-        element:<HouseOwnerpage/>,
-        children:[
-          
-            {
-                path:"/HouseOwner",
-                element:<OwnerContent/>,
-                
-            },
-            {
-                path:'/HouseOwner/NewForm',
-                element:<NewForm/>,
-              },
-            {
-                path:'/HouseOwner/NewForm/:id',
-                element:<NewForm/>,
-              },
-              {
-                path:'/HouseOwner/Bookingreq',
-                element:<BookingReq/>
-              },
-            ]
-         },
-      
-      
-  
-  
-  
-  
-  ])
+  {
+    path: "/Customer",
+    element: <Customerpage />,
+    children: [
+      {
+        path: "/Customer",
+        element: <Content />,
+      },
+      {
+        path: "/Customer/Placedetails/:id",
+        element: <Placedetails />,
+      },
+      {
+        path: "/Customer/bookings",
+        element: <Mybookings />,
+      },
+    ],
+  },
+
+  {
+    path: "/HouseOwner",
+    element: <HouseOwnerpage />,
+    children: [
+      {
+        path: "/HouseOwner",
+        element: <OwnerContent />,
+      },
+      {
+        path: "/HouseOwner/NewForm",
+        element: <NewForm />,
+      },
+      {
+        path: "/HouseOwner/NewForm/:id",
+        element: <NewForm />,
+      },
+      {
+        path: "/HouseOwner/Bookingreq",
+        element: <BookingReq />,
+      },
+    ],
+  },
+]);
   export default Router

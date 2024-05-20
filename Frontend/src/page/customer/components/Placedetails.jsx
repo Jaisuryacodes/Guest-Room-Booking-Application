@@ -10,23 +10,23 @@ const Placedetails = () => {
     const {id} =useParams();
     const [place,setPlace]=useState(null);
     const [Booking,setBooking]=useState(false);
-    const [BookingsRes,setBookingsRes]=useState('');
-
+    const [BookingsRes,setBookingsRes]=useState([]);
+     console.log(BookingsRes);
 
  
-    useEffect(()=>{
-      axios.get('/bookings').then(res=>{
-         setBookingsRes(res.data);
-       
-    });
-  },[])
+  
     useEffect(()=>{
       if(!id) {
         return;
+        
       }
       else{
         axios.get('/places/'+id).then(response=>{
           setPlace(response.data);
+          
+        })
+        axios.get('/availability/'+id).then(response=>{
+          setBookingsRes(response.data);
           
         })
       }
@@ -167,7 +167,8 @@ const Placedetails = () => {
 <h1 className="  font-semibold underline ">About the Place</h1>
         <div className="w-[500px] text-[16px] "> {place.description }</div>
 </div>
-  <Calendar  />
+
+  <Calendar bookings={BookingsRes} />
   <div className=" flex  gap-3 justify-center align-middle items-center">
     <Link  className=' bg-[#ff3636] rounded-xl py-3 px-2  font-medium text-white mb-3 flex gap-2 justify-center align-middle items-center' to={'/Customer'}>
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
