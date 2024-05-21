@@ -30,8 +30,36 @@ for both house owners and customers, ensuring a seamless booking experience.
 - npm (Node Package Manager)
 
 ### Steps
+**Important thing is please check your network connection**
 
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/Jaisuryacodes/Guest-Room-Booking-Application.git
-   cd guest-room-booking-app
+   cd Guest-Room-Booking-Application
+2. **Frontend:**
+    ```bash
+    cd Frontend
+    npm install 
+    npm run dev
+
+3. **Backend:**
+   ```bash
+   cd Backend
+   npm install
+   npm start
+
+### Demo Email id and Password
+     email id:
+     password:
+### House Owners
+  **houseOwner Login**
+   ```bash
+   hadmin@gmail.com
+   12312311
+### Customer 
+  ** Customer Login**
+   ```bash
+   cadmin@gmail.com
+   12312311
+
+        
