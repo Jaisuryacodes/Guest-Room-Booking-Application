@@ -49,17 +49,18 @@ for both house owners and customers, ensuring a seamless booking experience.
    npm start
 
 ### Demo Email id and Password
-     email id:
-     password:
-### House Owners
-  **houseOwner Login**
-   ```bash
-   hadmin@gmail.com
-   12312311
-### Customer 
+       email id:xxxxxxxx  
+       password:xxxxxxxx
+       
+ ### House Owners
+  ** houseOwner Login**
+       
+        hadmin@gmail.com
+        12312311
+ ### Customer  
   ** Customer Login**
-   ```bash
-   cadmin@gmail.com
-   12312311
+    
+        cadmin@gmail.com
+        12312311
 
         
