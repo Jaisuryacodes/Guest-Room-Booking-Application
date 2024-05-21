@@ -20,7 +20,7 @@ const BookingForm = () => {
     const [price,setPrice]=useState('');
     const [totalCost,setTotalCost]=useState('');
     const [ bookingId, setbookingId]=useState('');
-    const [bookingbutton,setbookingbutton]=useState('true');
+    const [bookingbutton,setbookingbutton]=useState(false);
     var noofdays=1;
     useEffect(()=>{
       
@@ -54,10 +54,13 @@ async function Booking(ev){
       if(noofdays>maxdays){
         setErr('Please check maximum days ⚠'+noofdays  )
         setdayStatus('false');
+            setbookingbutton(false);
         }
         else {
             setErr('valid ✔'+ noofdays );
             setdayStatus('true');
+            setbookingbutton(true);
+
             setTotalCost(noofdays*price);
         }
       }
@@ -154,16 +157,11 @@ async function Booking(ev){
           </h1>
           <h3>
             {dayStatus == "true" ? (
-              <span
-                className="text-[#009933] text-lg underline"
-                // onChange={setbookingbutton('true')}
-              >
-                {err}{" "}
-              </span>
+              <span className="text-[#009933] text-lg underline">{err} </span>
             ) : (
               <span
                 className="text-[#ff3636] text-lg underline"
-            //    { setbookingbutton("false")}
+                //
               >
                 {err}{" "}
               </span>
@@ -182,10 +180,10 @@ async function Booking(ev){
             </span>
           </h1>
 
-          {bookingbutton =='true' ? (
+          {bookingbutton ? (
             <button
               type="submit"
-              className="bg-red-500 hover:bg-[#00fd1e] text-white p-2 rounded-sm w-fit"
+              className="bg-[#009933] text-white p-2 rounded-sm w-fit"
             >
               Book Now
             </button>
