@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import SearchBox from "../../../components/SearchBox";
+
 
 const Content = () => {
   const [allPlaces, setAllplace] = useState();
@@ -12,8 +12,8 @@ const Content = () => {
   }, []);
   return (
     <>
-      <SearchBox />
-      <div className=" ContainerBox grid grid-cols-5 m-3 gap-6  ">
+      
+      <div className=" ContainerBox grid grid-cols-4  gap-6 px-[120px]  ">
         {allPlaces?.map((place, index) => {
           return (
             <div

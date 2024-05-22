@@ -1,6 +1,5 @@
 import React from 'react'
 
-import SearchBox from '../components/SearchBox'
 import Footer from '../components/Footer'
 import Content from '../components/Content.jsx'
 import Menu from '../components/Menu'
@@ -9,9 +8,9 @@ const Homepage = () => {
   return (
     <>
    <Menu/>
-   <div className="px-[40px]">
+   <div className="px-[40px] py-5">
    <Outlet/>
-    <SearchBox/>
+
     
    <Content/>
 
